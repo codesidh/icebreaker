@@ -1,5 +1,9 @@
 # 🧊 Icebreaker
 
+### 🌍 It's live: **https://ambitious-desert-027b7dd0f.7.azurestaticapps.net**
+
+Put that link on your trifold board — it works on any phone or computer.
+
 **A friend-making app.** New at school or sitting alone at lunch? Icebreaker
 gives you an easy way to start talking to someone: tell a joke, ask a riddle,
 share a surprising fact, pick a side on a big question, or play a quick brain
@@ -37,23 +41,40 @@ To stop it, press `Ctrl + C` in the terminal.
 
 ---
 
-## 🌍 Put it on the internet (the cloud!)
+## 🌍 It's already on the cloud (Azure!)
 
-The easiest, no-install way — great for showing your class:
+This project is **already set up and deployed** — you don't have to do
+anything to put it online. Here's how it works:
 
-1. Put this folder on **GitHub** (your teacher or a parent can help create a
-   free account and a new repository).
-2. Go to **[vercel.com](https://vercel.com)** and sign up (the free "Hobby"
-   plan is perfect for a school project).
-3. Click **Add New → Project**, choose your GitHub repository, and press
-   **Deploy**. Vercel automatically sees it's a Next.js app — you don't have to
-   change a single setting.
-4. In about a minute you'll get a public link like
-   `https://icebreaker.vercel.app` you can put on your trifold board. Every
-   time you push a change to GitHub, the website updates by itself.
+- **Code lives on GitHub:** https://github.com/codesidh/icebreaker
+- **Website is hosted on Microsoft Azure** (Azure Static Web Apps, free tier):
+  **https://ambitious-desert-027b7dd0f.7.azurestaticapps.net**
+- **It updates by itself.** Every time you `git push` a change to the `main`
+  branch on GitHub, a robot (GitHub Actions) automatically rebuilds the app
+  and updates the live website in a couple of minutes. You can watch it happen
+  on the **Actions** tab of the GitHub repo.
 
-Prefer the command line instead? Install the Vercel CLI once with
-`npm i -g vercel`, then run `vercel` in this folder and follow the prompts.
+### The "push your change live" routine
+
+```bash
+git add .
+git commit -m "Added my own jokes"
+git push
+```
+
+That's it — wait ~2 minutes and refresh the Azure link. 🎉
+
+<details>
+<summary>For grown-ups: how the cloud was set up</summary>
+
+- Azure resource group `icebreaker-rg`, an Azure Static Web App named
+  `icebreaker-web` (Free SKU) in `eastus2`.
+- The site is a static export (`next build` with `output: "export"`), so there
+  is no server to manage and the free tier is plenty.
+- `.github/workflows/azure-deploy.yml` builds and deploys on every push,
+  using the repo secret `AZURE_STATIC_WEB_APPS_API_TOKEN`.
+
+</details>
 
 ---
 
