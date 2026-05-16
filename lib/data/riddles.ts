@@ -1,0 +1,28 @@
+export type Riddle = { riddle: string; answer: string };
+
+export const RIDDLES: Riddle[] = [
+  { riddle: "What has hands but cannot clap?", answer: "A clock." },
+  { riddle: "What gets wetter the more it dries?", answer: "A towel." },
+  { riddle: "What has a head and a tail but no body?", answer: "A coin." },
+  { riddle: "What has many keys but can't open a single lock?", answer: "A piano." },
+  { riddle: "The more you take, the more you leave behind. What am I?", answer: "Footsteps." },
+  { riddle: "What has to be broken before you can use it?", answer: "An egg." },
+  { riddle: "What goes up but never comes down?", answer: "Your age." },
+  { riddle: "I'm full of holes but still hold water. What am I?", answer: "A sponge." },
+  { riddle: "What has one eye but cannot see?", answer: "A needle." },
+  { riddle: "What can travel around the world while staying in one corner?", answer: "A stamp." },
+  { riddle: "What has a neck but no head?", answer: "A bottle." },
+  { riddle: "What runs all around a yard but never moves?", answer: "A fence." },
+  { riddle: "What can you catch but not throw?", answer: "A cold." },
+  { riddle: "What has teeth but cannot bite?", answer: "A comb." },
+  { riddle: "What month of the year has 28 days?", answer: "All of them." },
+  { riddle: "What is always in front of you but can't be seen?", answer: "The future." },
+  { riddle: "What has a thumb and four fingers but is not alive?", answer: "A glove." },
+  { riddle: "What gets bigger the more you take away from it?", answer: "A hole." },
+  { riddle: "What can fill a room but takes up no space?", answer: "Light." },
+  { riddle: "I follow you all day but vanish at night. What am I?", answer: "Your shadow." },
+  { riddle: "What word is spelled wrong in every dictionary?", answer: '"Wrong."' },
+  { riddle: "What has words but never speaks?", answer: "A book." },
+  { riddle: "What building has the most stories?", answer: "A library." },
+  { riddle: "What kind of band never plays music?", answer: "A rubber band." },
+];

@@ -1,0 +1,188 @@
+export type Trivia = {
+  category: string;
+  question: string;
+  options: string[];
+  answer: number; // index into options
+  fact: string;
+};
+
+export const TRIVIA: Trivia[] = [
+  {
+    category: "Space",
+    question: "Which planet is the largest in our solar system?",
+    options: ["Earth", "Saturn", "Jupiter", "Neptune"],
+    answer: 2,
+    fact: "Jupiter is so big that all the other planets could fit inside it.",
+  },
+  {
+    category: "Animals",
+    question: "What is a group of lions called?",
+    options: ["A pack", "A pride", "A herd", "A flock"],
+    answer: 1,
+    fact: "A lion's roar can be heard up to 5 miles (8 km) away.",
+  },
+  {
+    category: "Science",
+    question: "What gas do plants breathe in to make food?",
+    options: ["Oxygen", "Hydrogen", "Carbon dioxide", "Nitrogen"],
+    answer: 2,
+    fact: "Plants turn carbon dioxide and sunlight into food in a process called photosynthesis.",
+  },
+  {
+    category: "Geography",
+    question: "Which is the longest river in the world?",
+    options: ["Amazon", "Nile", "Mississippi", "Yangtze"],
+    answer: 1,
+    fact: "The Nile runs about 4,130 miles through northeastern Africa.",
+  },
+  {
+    category: "Animals",
+    question: "How many hearts does an octopus have?",
+    options: ["1", "2", "3", "5"],
+    answer: 2,
+    fact: "Two hearts pump blood to the gills, and one pumps it to the rest of the body.",
+  },
+  {
+    category: "Body",
+    question: "Which is the largest organ in the human body?",
+    options: ["The heart", "The brain", "The skin", "The liver"],
+    answer: 2,
+    fact: "Your skin makes up about 16% of your body weight.",
+  },
+  {
+    category: "Space",
+    question: "How long does light from the Sun take to reach Earth?",
+    options: ["8 seconds", "8 minutes", "8 hours", "8 days"],
+    answer: 1,
+    fact: "Sunlight travels about 93 million miles to reach us in roughly 8 minutes.",
+  },
+  {
+    category: "Nature",
+    question: "What is the tallest type of tree on Earth?",
+    options: ["Oak", "Pine", "Coast redwood", "Maple"],
+    answer: 2,
+    fact: "Coast redwoods can grow taller than a 35-story building.",
+  },
+  {
+    category: "Animals",
+    question: "Which animal never sleeps the way we do — bullfrogs are famous for this?",
+    options: ["Bullfrog", "Cat", "Dolphin", "Owl"],
+    answer: 0,
+    fact: "Bullfrogs stay alert around the clock instead of having long sleep like us.",
+  },
+  {
+    category: "Science",
+    question: "What is the hardest natural material on Earth?",
+    options: ["Gold", "Iron", "Diamond", "Quartz"],
+    answer: 2,
+    fact: "Diamonds are made of carbon, the same element as pencil lead.",
+  },
+  {
+    category: "Geography",
+    question: "How many continents are there on Earth?",
+    options: ["5", "6", "7", "8"],
+    answer: 2,
+    fact: "Asia is the biggest continent and is home to more than half of all people.",
+  },
+  {
+    category: "Food",
+    question: "Which food never spoils if stored properly?",
+    options: ["Bread", "Honey", "Milk", "Cheese"],
+    answer: 1,
+    fact: "Honey found in 3,000-year-old tombs was still safe to eat.",
+  },
+  {
+    category: "Space",
+    question: "What is the closest star to Earth?",
+    options: ["The Moon", "Polaris", "The Sun", "Sirius"],
+    answer: 2,
+    fact: "The Sun is a star — just a very close one.",
+  },
+  {
+    category: "Animals",
+    question: "What is the fastest land animal?",
+    options: ["Lion", "Cheetah", "Horse", "Greyhound"],
+    answer: 1,
+    fact: "A cheetah can sprint up to 70 mph (112 km/h) in short bursts.",
+  },
+  {
+    category: "Science",
+    question: "What part of the atom has a positive charge?",
+    options: ["Electron", "Proton", "Neutron", "Photon"],
+    answer: 1,
+    fact: "Protons sit in the nucleus along with neutrons.",
+  },
+  {
+    category: "History",
+    question: "Which ancient wonder still stands today?",
+    options: [
+      "Hanging Gardens",
+      "Great Pyramid of Giza",
+      "Colossus of Rhodes",
+      "Lighthouse of Alexandria",
+    ],
+    answer: 1,
+    fact: "The Great Pyramid was the tallest building made by humans for nearly 4,000 years.",
+  },
+  {
+    category: "Body",
+    question: "How many bones are in the adult human body?",
+    options: ["106", "206", "306", "406"],
+    answer: 1,
+    fact: "Babies are born with about 300 bones; some fuse together as you grow.",
+  },
+  {
+    category: "Nature",
+    question: "What causes the sound of thunder?",
+    options: [
+      "Clouds bumping",
+      "Rain hitting the ground",
+      "Air heated by lightning",
+      "Wind in the trees",
+    ],
+    answer: 2,
+    fact: "Lightning heats the air so fast it explodes outward — that bang is thunder.",
+  },
+  {
+    category: "Geography",
+    question: "Which desert is the largest hot desert in the world?",
+    options: ["Gobi", "Sahara", "Mojave", "Kalahari"],
+    answer: 1,
+    fact: "The Sahara is roughly the size of the entire United States.",
+  },
+  {
+    category: "Animals",
+    question: "Which sea creature can change color to match its surroundings?",
+    options: ["Octopus", "Tuna", "Jellyfish", "Crab"],
+    answer: 0,
+    fact: "Octopuses change color using special cells in their skin called chromatophores.",
+  },
+  {
+    category: "Science",
+    question: "Water freezes at what temperature in Celsius?",
+    options: ["0°C", "10°C", "32°C", "100°C"],
+    answer: 0,
+    fact: "Water boils at 100°C and freezes at 0°C at sea level.",
+  },
+  {
+    category: "Space",
+    question: "Which planet is famous for its rings?",
+    options: ["Mars", "Venus", "Saturn", "Mercury"],
+    answer: 2,
+    fact: "Saturn's rings are made mostly of ice and rock, some pieces tiny, some house-sized.",
+  },
+  {
+    category: "Food",
+    question: "Bananas are berries, but strawberries are not. True or false?",
+    options: ["True", "False"],
+    answer: 0,
+    fact: "Botanically, bananas count as berries while strawberries do not.",
+  },
+  {
+    category: "Nature",
+    question: "How many colors are in a rainbow?",
+    options: ["5", "6", "7", "9"],
+    answer: 2,
+    fact: "Red, orange, yellow, green, blue, indigo, and violet — try the name 'Roy G. Biv.'",
+  },
+];

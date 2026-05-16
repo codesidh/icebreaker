@@ -1,0 +1,243 @@
+@import "tailwindcss";
+
+/* ============================================================
+   "Recess Arcade" — a bright, chunky, sticker-book design system.
+   Thick ink outlines, hard offset shadows, candy colors, bouncy
+   motion. Built to feel like a friendly toy, not a corporate app.
+   ============================================================ */
+
+@theme {
+  --font-display: var(--font-fredoka), "Trebuchet MS", system-ui, sans-serif;
+  --font-body: var(--font-nunito), system-ui, sans-serif;
+
+  --color-cream: #fff6e6;
+  --color-paper: #fffdf7;
+  --color-ink: #1f1133;
+
+  --color-sun: #ffd23f;
+  --color-bubble: #ff5da2;
+  --color-sky: #36c5f0;
+  --color-lime: #8ac926;
+  --color-tangerine: #ff8c42;
+  --color-grape: #9b5de5;
+  --color-mint: #2ec4b6;
+  --color-cherry: #ef476f;
+
+  --radius-blob: 1.6rem;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    background-color: var(--color-cream);
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(255, 93, 162, 0.16), transparent 42%),
+      radial-gradient(circle at 88% 12%, rgba(54, 197, 240, 0.18), transparent 40%),
+      radial-gradient(circle at 78% 88%, rgba(138, 201, 38, 0.16), transparent 44%),
+      radial-gradient(circle at 20% 82%, rgba(155, 93, 229, 0.14), transparent 44%);
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* faint dotted "graph paper" texture layered over the page */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(31, 17, 51, 0.06) 1.5px, transparent 1.6px);
+    background-size: 26px 26px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: var(--color-sun);
+    color: var(--color-ink);
+  }
+}
+
+@layer components {
+  /* Chunky card with a hard offset shadow — the core surface. */
+  .pop {
+    border: 3px solid var(--color-ink);
+    border-radius: var(--radius-blob);
+    box-shadow: 6px 6px 0 0 var(--color-ink);
+    background: var(--color-paper);
+  }
+
+  /* Pressable, tactile button. Collapses its shadow when pushed. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    border: 3px solid var(--color-ink);
+    border-radius: 999px;
+    padding: 0.7rem 1.4rem;
+    box-shadow: 4px 4px 0 0 var(--color-ink);
+    transition:
+      transform 0.08s ease,
+      box-shadow 0.08s ease,
+      filter 0.15s ease;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .btn:hover {
+    filter: brightness(1.04) saturate(1.05);
+  }
+
+  .btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0 0 0 0 var(--color-ink);
+  }
+
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: 4px 4px 0 0 var(--color-ink);
+  }
+
+  .btn-sm {
+    padding: 0.45rem 0.95rem;
+    box-shadow: 3px 3px 0 0 var(--color-ink);
+  }
+  .btn-sm:active {
+    transform: translate(3px, 3px);
+  }
+
+  /* A tappable square (game cells, number pads, letter keys). */
+  .chip {
+    border: 3px solid var(--color-ink);
+    border-radius: 0.9rem;
+    box-shadow: 3px 3px 0 0 var(--color-ink);
+    background: var(--color-paper);
+    transition:
+      transform 0.07s ease,
+      box-shadow 0.07s ease,
+      background 0.12s ease;
+    cursor: pointer;
+  }
+  .chip:hover:not(:disabled) {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 0 var(--color-ink);
+  }
+  .chip:active:not(:disabled) {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 0 var(--color-ink);
+  }
+  .chip:disabled {
+    cursor: default;
+  }
+}
+
+@layer utilities {
+  .text-stroke {
+    -webkit-text-stroke: 2px var(--color-ink);
+    paint-order: stroke fill;
+  }
+
+  /* Entrance: pop + rise. Pair with inline animation-delay for stagger. */
+  .rise {
+    opacity: 0;
+    animation: rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(22px) scale(0.94);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .wiggle {
+    animation: wiggle 2.6s ease-in-out infinite;
+  }
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(-4deg);
+    }
+    50% {
+      transform: rotate(4deg);
+    }
+  }
+
+  .pop-in {
+    animation: pop-in 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  @keyframes pop-in {
+    from {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .float {
+    animation: float 5s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+
+  .confetti-fall {
+    animation: confetti-fall linear forwards;
+  }
+  @keyframes confetti-fall {
+    from {
+      transform: translateY(-12vh) rotate(0deg);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(108vh) rotate(720deg);
+      opacity: 0.9;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rise,
+    .wiggle,
+    .pop-in,
+    .float,
+    .confetti-fall {
+      animation: none;
+      opacity: 1;
+    }
+  }
+}

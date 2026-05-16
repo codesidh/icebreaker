@@ -1,0 +1,36 @@
+export type Joke = { setup: string; punchline: string };
+
+// Clean, school-friendly jokes. The kind you can tell a stranger and still
+// be friends afterward.
+export const JOKES: Joke[] = [
+  { setup: "Why don't scientists trust atoms?", punchline: "Because they make up everything!" },
+  { setup: "What do you call a fish wearing a bowtie?", punchline: "Sofishticated." },
+  { setup: "Why did the math book look so sad?", punchline: "It had too many problems." },
+  { setup: "What do you call a bear with no teeth?", punchline: "A gummy bear!" },
+  { setup: "Why can't you give Elsa a balloon?", punchline: "Because she will let it go." },
+  { setup: "What did the ocean say to the beach?", punchline: "Nothing, it just waved." },
+  { setup: "Why did the bicycle fall over?", punchline: "Because it was two-tired." },
+  { setup: "What do you call cheese that isn't yours?", punchline: "Nacho cheese!" },
+  { setup: "Why did the scarecrow win an award?", punchline: "He was outstanding in his field." },
+  { setup: "What's orange and sounds like a parrot?", punchline: "A carrot." },
+  { setup: "Why can't your nose be 12 inches long?", punchline: "Because then it would be a foot." },
+  { setup: "What do you call a sleeping dinosaur?", punchline: "A dino-snore." },
+  { setup: "Why did the student eat his homework?", punchline: "The teacher said it was a piece of cake." },
+  { setup: "What kind of tree fits in your hand?", punchline: "A palm tree." },
+  { setup: "How does a penguin build its house?", punchline: "Igloos it together." },
+  { setup: "Why was the broom late?", punchline: "It over-swept." },
+  { setup: "What did one wall say to the other wall?", punchline: "I'll meet you at the corner." },
+  { setup: "Why don't eggs tell jokes?", punchline: "They'd crack each other up." },
+  { setup: "What do you call a dog magician?", punchline: "A labracadabrador." },
+  { setup: "Why did the cookie go to the doctor?", punchline: "Because it felt crummy." },
+  { setup: "What do you get when you cross a snowman and a vampire?", punchline: "Frostbite." },
+  { setup: "How do you organize a space party?", punchline: "You planet." },
+  { setup: "Why did the tomato turn red?", punchline: "Because it saw the salad dressing." },
+  { setup: "What's a computer's favorite snack?", punchline: "Microchips." },
+  { setup: "Why are elevator jokes so good?", punchline: "They work on so many levels." },
+  { setup: "What did the grape do when it got stepped on?", punchline: "Nothing — it just let out a little wine." },
+  { setup: "Why did the music teacher need a ladder?", punchline: "To reach the high notes." },
+  { setup: "What do you call a pile of cats?", punchline: "A meow-tain." },
+  { setup: "Why was the football stadium so cold?", punchline: "It was full of fans." },
+  { setup: "What do you call a boomerang that won't come back?", punchline: "A stick." },
+];
