@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Tile from "@/components/Tile";
 import StatStrip from "@/components/StatStrip";
-import { TEAM, SCHOOL } from "@/lib/credits";
 
 const ICEBREAKERS = [
   {
@@ -112,9 +111,17 @@ export default function HomePage() {
     <div className="mx-auto w-full max-w-5xl px-4 py-5 sm:px-6 sm:py-7">
       {/* ---- Sticky glass nav ---- */}
       <nav className="rise glass sticky top-3 z-30 mb-12 flex items-center justify-between rounded-2xl px-4 py-2.5 sm:mb-16">
-        <span className="flex items-center gap-2 font-display text-lg font-bold tracking-tight">
-          <span aria-hidden>🧊</span> Icebreaker
-        </span>
+        <div className="flex items-center gap-3 sm:gap-4">
+          <span className="flex items-center gap-2 font-display text-lg font-bold tracking-tight">
+            <span aria-hidden>🧊</span> Icebreaker
+          </span>
+          <Link
+            href="/credits"
+            className="tint-grape rounded-full border px-3.5 py-1.5 font-display text-xs font-bold transition hover:brightness-125 sm:text-sm"
+          >
+            🎉 Credits
+          </Link>
+        </div>
         <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-muted ring-1 ring-white/10">
           School project
         </span>
@@ -214,12 +221,6 @@ export default function HomePage() {
         <p className="mt-2">
           Icebreaker — a school project. Every game is original. Be kind, have
           fun. 💛
-        </p>
-        <p className="mt-4 text-balance">
-          Made by{" "}
-          <span className="font-bold text-ink">{TEAM}</span>
-          <br />
-          {SCHOOL}
         </p>
       </footer>
     </div>
