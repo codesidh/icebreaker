@@ -1,11 +1,11 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { TEAM, SCHOOL } from "@/lib/credits";
 
 // ─────────────────────────────────────────────────────────────
-//  ✏️  KIDS: put your names here — they show on the board.
-const TEAM = "Add your team names here";
-const SCHOOL = "Add your school / class here";
+//  ✏️  Team names & school live in lib/credits.ts (one place,
+//  shared with the website footer).
 //  The live website your QR code points to:
 const LIVE_URL = "ambitious-desert-027b7dd0f.7.azurestaticapps.net";
 // ─────────────────────────────────────────────────────────────
@@ -25,16 +25,57 @@ const C = {
   cherry: "#e5484d",
 };
 
+// Each panel prints as its OWN full portrait page (3 sheets total).
+// Lay the 3 sheets side-by-side on the trifold board.
 const PRINT_CSS = `
 @media print {
-  @page { size: Letter landscape; margin: 8mm; }
+  @page { size: Letter portrait; margin: 9mm; }
   html, body { background:#fff !important; }
   .no-print { display:none !important; }
   .stage { background:#fff !important; padding:0 !important; }
-  .board { box-shadow:none !important; margin:0 !important;
-           width:100% !important; max-width:none !important; gap:6mm !important; }
-  .panel { break-inside:avoid; box-shadow:none !important; }
-  .board, .board * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+
+  /* Break the on-screen grid: one panel per page, stacked. */
+  .board {
+    display:block !important;
+    box-shadow:none !important;
+    margin:0 !important;
+    width:100% !important;
+    max-width:none !important;
+    gap:0 !important;
+  }
+
+  /* Each panel fills one full sheet, never splits across pages. */
+  .panel {
+    break-after: page;
+    break-inside: avoid;
+    box-shadow:none !important;
+    border-radius:0 !important;
+    min-height: 257mm;          /* ≈ Letter portrait printable height */
+    margin:0 !important;
+  }
+  .panel:last-of-type { break-after: auto; }
+
+  /* Spread the blocks so the page looks full and big. */
+  .panel-body {
+    flex: 1 1 auto;
+    justify-content: space-between;
+    padding-left: 12mm !important;
+    padding-right: 12mm !important;
+  }
+  .panel-eyebrow { padding-top: 9px !important; padding-bottom: 9px !important; }
+
+  /* Bigger type — readable across a room when on the board. */
+  .board h2 { font-size: 2.05rem !important; }
+  .board h3 { font-size: 1.4rem !important; }
+  .blk-body { font-size: 1.08rem !important; line-height: 1.4 !important; }
+  .panel-foot { font-size: 0.95rem !important; }
+  .qr-img { height: 64mm !important; width: 64mm !important; }
+  .lead { font-size: 1rem !important; }
+
+  .board, .board * {
+    -webkit-print-color-adjust:exact !important;
+    print-color-adjust:exact !important;
+  }
 }
 `;
 
@@ -72,7 +113,7 @@ function Block({
         {title}
       </h3>
       <div
-        className="text-[0.92rem] font-semibold leading-snug"
+        className="blk-body text-[0.92rem] font-semibold leading-snug"
         style={{ color: INK }}
       >
         {children}
@@ -92,19 +133,29 @@ function Panel({
 }) {
   return (
     <div
-      className="panel flex flex-col gap-3 overflow-hidden rounded-2xl"
+      className="panel flex flex-col overflow-hidden rounded-2xl"
       style={{
         background: "#ffffff",
         boxShadow: "0 24px 50px -28px rgba(0,0,0,0.6)",
       }}
     >
       <div
-        className="px-5 py-2 text-center font-display text-sm font-bold uppercase tracking-[0.2em]"
+        className="panel-eyebrow px-5 py-2 text-center font-display text-sm font-bold uppercase tracking-[0.2em]"
         style={{ background: accent, color: "#fff" }}
       >
         {eyebrow}
       </div>
-      <div className="flex flex-col gap-3 px-5 pb-5">{children}</div>
+      <div className="panel-body flex flex-1 flex-col gap-3 px-5 pt-3">
+        <div className="flex flex-1 flex-col gap-3">{children}</div>
+        {/* Slim credit band — same on every page, reads as one
+            continuous strip across the trifold. */}
+        <div
+          className="panel-foot mt-3 rounded-xl px-4 py-2 text-center font-display text-xs font-bold"
+          style={{ background: INK, color: "#fff" }}
+        >
+          Made by {TEAM} · {SCHOOL} · Built with Next.js, hosted on Azure 💛
+        </div>
+      </div>
     </div>
   );
 }
@@ -120,9 +171,10 @@ export default function PosterPage() {
           <div>
             <h1 className="text-2xl">🖼️ Your trifold project board</h1>
             <p className="mt-1 text-sm font-semibold text-muted">
-              Click print, choose <b>Landscape</b> and <b>“Save as PDF”</b>{" "}
-              (or print on paper), then cut out the three panels and glue them
-              onto your board.
+              Prints as <b>3 separate pages — one full page per panel</b>.
+              Click print, choose <b>Portrait</b>, set <b>Margins: Default</b>{" "}
+              and turn <b>Background graphics ON</b>. Print all 3 sheets and
+              place them side-by-side on your trifold board.
             </p>
           </div>
           <div className="flex shrink-0 gap-2">
@@ -140,22 +192,23 @@ export default function PosterPage() {
         </div>
         <p className="mt-3 text-center text-xs font-semibold text-muted">
           Tip: open <code>app/poster/page.tsx</code> to type your real team
-          names — it’s marked at the top.
+          names — it’s marked at the top. On screen the 3 panels sit
+          side-by-side so you can preview the whole board.
         </p>
       </div>
 
       {/* ---- The board (always paper-colored so it prints clean) ---- */}
       <div className="stage px-4 pb-12 sm:px-6">
         <div
-          className="board mx-auto grid w-full max-w-6xl gap-5 md:grid-cols-3"
+          className="board mx-auto grid w-full max-w-6xl items-stretch gap-5 md:grid-cols-3"
           style={{ color: INK }}
         >
-          {/* LEFT — the idea */}
+          {/* PAGE 1 — the idea */}
           <Panel accent={C.sky} eyebrow="Science Fair Project">
             <div className="text-center">
-              <div className="text-5xl">🧊</div>
+              <div className="text-6xl">🧊</div>
               <div className="font-display text-4xl font-bold">Icebreaker</div>
-              <p className="text-sm font-bold" style={{ color: MUTED }}>
+              <p className="lead text-sm font-bold" style={{ color: MUTED }}>
                 A friendly way to make friends
               </p>
             </div>
@@ -176,11 +229,11 @@ export default function PosterPage() {
             </Block>
           </Panel>
 
-          {/* CENTER — try it now */}
+          {/* PAGE 2 — try it now */}
           <Panel accent={C.grape} eyebrow="Try It Right Now">
             <div className="text-center">
               <h2 className="text-2xl leading-tight">Scan it on your phone 📱</h2>
-              <p className="mt-1 text-sm font-bold" style={{ color: MUTED }}>
+              <p className="lead mt-1 text-sm font-bold" style={{ color: MUTED }}>
                 Works on any phone, tablet, or computer.
                 <br />
                 No download. No sign-up.
@@ -195,7 +248,7 @@ export default function PosterPage() {
               <img
                 src="/qr.svg"
                 alt="QR code — scan to open the Icebreaker app"
-                className="mx-auto block h-52 w-52"
+                className="qr-img mx-auto block h-52 w-52"
               />
             </div>
 
@@ -227,7 +280,7 @@ export default function PosterPage() {
             </Block>
           </Panel>
 
-          {/* RIGHT — how it works + tech */}
+          {/* PAGE 3 — how it works + tech */}
           <Panel accent={C.tangerine} eyebrow="How It Works">
             <Block icon="🧊" title="Break the Ice" color={C.sky}>
               <ul className="ml-4 list-disc space-y-0.5">
@@ -258,14 +311,6 @@ export default function PosterPage() {
               answers across phones.
             </Block>
           </Panel>
-
-          {/* Footer strip */}
-          <div
-            className="panel rounded-2xl px-5 py-3 text-center font-display text-sm font-bold md:col-span-3"
-            style={{ background: INK, color: "#fff" }}
-          >
-            Made by {TEAM} · {SCHOOL} · Built with Next.js, hosted on Azure 💛
-          </div>
         </div>
       </div>
     </>

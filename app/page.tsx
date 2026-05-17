@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Tile from "@/components/Tile";
 import StatStrip from "@/components/StatStrip";
+import { TEAM, SCHOOL } from "@/lib/credits";
 
 const ICEBREAKERS = [
   {
@@ -213,6 +214,12 @@ export default function HomePage() {
         <p className="mt-2">
           Icebreaker — a school project. Every game is original. Be kind, have
           fun. 💛
+        </p>
+        <p className="mt-4 text-balance">
+          Made by{" "}
+          <span className="font-bold text-ink">{TEAM}</span>
+          <br />
+          {SCHOOL}
         </p>
       </footer>
     </div>
