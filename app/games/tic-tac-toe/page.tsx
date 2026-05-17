@@ -122,7 +122,7 @@ export default function TicTacToePage() {
                 key={i}
                 onClick={() => play(i)}
                 disabled={!!cell || over || turn !== "human"}
-                className={`chip flex h-24 w-24 items-center justify-center text-5xl font-extrabold sm:h-28 sm:w-28 ${
+                className={`chip flex aspect-square w-[min(26vw,7rem)] items-center justify-center text-[min(13vw,3.5rem)] font-extrabold ${
                   highlight ? "bg-lime" : "bg-paper"
                 } ${cell === "X" ? "text-bubble" : "text-sky"}`}
               >

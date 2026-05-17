@@ -117,8 +117,8 @@ export default function SudokuPage() {
             Shuffling a fresh puzzle… 🔀
           </p>
         ) : (
-          <div className="pop bg-ink p-2">
-            <div className="grid grid-cols-9 gap-[2px] bg-ink">
+          <div className="pop w-full max-w-[min(92vw,26rem)] bg-ink p-1.5 sm:p-2">
+            <div className="grid aspect-square grid-cols-9 gap-[2px] bg-ink">
               {values.map((row, r) =>
                 row.map((val, c) => {
                   const given = puzzle[r][c] !== 0;
@@ -132,7 +132,7 @@ export default function SudokuPage() {
                     <button
                       key={`${r},${c}`}
                       onClick={() => setSel([r, c])}
-                      className={`flex h-9 w-9 items-center justify-center text-lg font-extrabold sm:h-11 sm:w-11 sm:text-xl ${
+                      className={`flex aspect-square w-full items-center justify-center text-[clamp(0.85rem,4.4vw,1.35rem)] font-extrabold ${
                         given
                           ? "bg-cream text-ink"
                           : isBad

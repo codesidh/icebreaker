@@ -115,7 +115,7 @@ export default function WordSearchPage() {
         ) : null}
 
         {puzzle ? (
-          <div className="pop overflow-x-auto bg-paper p-3">
+          <div className="pop w-full max-w-[min(94vw,32rem)] bg-paper p-2.5 sm:p-3">
             <div
               className="grid gap-[3px]"
               style={{
@@ -132,7 +132,7 @@ export default function WordSearchPage() {
                     <button
                       key={ck(r, c)}
                       onClick={() => tap(r, c)}
-                      className={`flex aspect-square w-7 items-center justify-center rounded-md text-[13px] font-extrabold transition-colors sm:w-9 sm:text-base ${
+                      className={`flex aspect-square w-full items-center justify-center rounded-md text-[clamp(0.6rem,2.7vw,0.95rem)] font-extrabold transition-colors ${
                         isFound
                           ? "bg-lime"
                           : isStart

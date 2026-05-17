@@ -128,7 +128,7 @@ export default function MemoryPage() {
                 key={card.id}
                 onClick={() => flip(i)}
                 disabled={up || lock}
-                className={`chip flex h-20 w-20 items-center justify-center text-4xl sm:h-24 sm:w-24 ${
+                className={`chip flex aspect-square w-[min(20vw,5.5rem)] items-center justify-center text-[min(9vw,2.5rem)] ${
                   card.matched
                     ? "bg-lime"
                     : up

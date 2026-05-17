@@ -91,14 +91,14 @@ export default function RpsPage() {
           </span>
         </div>
 
-        <div className="flex items-center gap-6">
-          <div className="pop flex h-28 w-28 items-center justify-center bg-paper text-6xl">
+        <div className="flex items-center gap-4 sm:gap-6">
+          <div className="pop flex aspect-square w-[min(26vw,7rem)] items-center justify-center bg-paper text-[min(13vw,3.5rem)]">
             <span className={you ? "pop-in" : "opacity-30"}>
               {you ? MOVES.find((m) => m.id === you)!.emoji : "❔"}
             </span>
           </div>
           <span className="font-display text-2xl font-bold">vs</span>
-          <div className="pop flex h-28 w-28 items-center justify-center bg-paper text-6xl">
+          <div className="pop flex aspect-square w-[min(26vw,7rem)] items-center justify-center bg-paper text-[min(13vw,3.5rem)]">
             <span className={cpu ? "pop-in" : "opacity-30"}>
               {cpu ? MOVES.find((m) => m.id === cpu)!.emoji : "❔"}
             </span>
@@ -115,7 +115,7 @@ export default function RpsPage() {
               key={m.id}
               onClick={() => play(m.id)}
               disabled={matchOver}
-              className="chip flex h-24 w-24 flex-col items-center justify-center gap-1 disabled:opacity-40"
+              className="chip flex aspect-square w-[min(26vw,6rem)] flex-col items-center justify-center gap-1 disabled:opacity-40"
             >
               <span className="text-4xl">{m.emoji}</span>
               <span className="text-xs font-extrabold uppercase">

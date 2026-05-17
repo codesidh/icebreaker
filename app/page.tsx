@@ -1,3 +1,5 @@
+import type { CSSProperties } from "react";
+import Link from "next/link";
 import Tile from "@/components/Tile";
 
 const ICEBREAKERS = [
@@ -86,42 +88,64 @@ const GAMES = [
 export default function HomePage() {
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-      {/* ---- Hero ---- */}
-      <section className="rise relative mb-12 text-center">
-        <span
-          className="float absolute -left-1 top-0 hidden text-5xl sm:block"
-          style={{ animationDelay: "0.4s" }}
-          aria-hidden
-        >
-          🎲
+      {/* ---- Brand bar ---- */}
+      <nav className="rise mb-10 flex items-center justify-between sm:mb-14">
+        <span className="flex items-center gap-2 font-display text-lg font-bold tracking-tight">
+          <span aria-hidden>🧊</span> Icebreaker
         </span>
-        <span
-          className="float absolute -right-1 top-4 hidden text-5xl sm:block"
-          style={{ animationDelay: "1.2s" }}
-          aria-hidden
-        >
-          😄
+        <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-muted shadow-[0_1px_2px_rgba(29,27,48,0.06)] ring-1 ring-black/5">
+          School project
         </span>
+      </nav>
 
-        <p className="mb-3 inline-block rotate-[-2deg] rounded-full border-[3px] border-ink bg-sun px-4 py-1 text-sm font-extrabold shadow-[3px_3px_0_var(--color-ink)]">
-          A friend-making app 🧊
+      {/* ---- Hero ---- */}
+      <section className="rise mb-14 text-center sm:mb-20">
+        <p
+          className="mb-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-muted shadow-[0_1px_2px_rgba(29,27,48,0.06)] ring-1 ring-black/5 sm:text-sm"
+          style={
+            { ["--accent" as string]: "var(--color-grape)" } as CSSProperties
+          }
+        >
+          <span
+            className="inline-block h-2 w-2 rounded-full"
+            style={{ background: "var(--accent)" }}
+            aria-hidden
+          />
+          A friendly way to make friends
         </p>
-        <h1 className="text-5xl leading-[1.05] text-stroke text-paper sm:text-7xl">
-          Icebreaker
+        <h1 className="text-balance text-5xl font-bold leading-[1.05] sm:text-7xl">
+          Icebreaker<span style={{ color: "var(--color-grape)" }}>.</span>
         </h1>
-        <p className="mx-auto mt-5 max-w-xl text-base font-bold sm:text-lg">
-          New at school or sitting alone at lunch? Pick anything below — a joke,
-          a riddle, a big question, or a game. It makes saying{" "}
-          <span className="bg-sky px-1">“hi”</span> a whole lot easier.
+        <p className="mx-auto mt-5 max-w-xl text-balance text-base font-semibold text-muted sm:text-lg">
+          New at school or sitting alone at lunch? Pick a joke, a riddle, a big
+          question, or a game — it makes saying “hi” a whole lot easier.
         </p>
+        <div className="mt-7 flex flex-wrap items-center justify-center gap-2.5 text-xs font-bold text-muted sm:text-sm">
+          {["No sign-up", "Works on any device", "100% original games"].map(
+            (chip) => (
+              <span
+                key={chip}
+                className="rounded-full bg-white px-3.5 py-1.5 shadow-[0_1px_2px_rgba(29,27,48,0.06)] ring-1 ring-black/5"
+              >
+                {chip}
+              </span>
+            ),
+          )}
+        </div>
       </section>
 
       {/* ---- Break the Ice ---- */}
-      <section className="mb-12">
-        <h2 className="rise mb-5 flex items-center gap-2 text-2xl sm:text-3xl">
-          <span aria-hidden>🧊</span> Break the Ice
-        </h2>
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="mb-14">
+        <div className="rise mb-6">
+          <p
+            className="text-xs font-bold uppercase tracking-[0.18em]"
+            style={{ color: "var(--color-grape)" }}
+          >
+            Start a conversation
+          </p>
+          <h2 className="mt-1 text-2xl sm:text-3xl">🧊 Break the Ice</h2>
+        </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
           {ICEBREAKERS.map((t, i) => (
             <Tile key={t.href} {...t} index={i} />
           ))}
@@ -130,19 +154,33 @@ export default function HomePage() {
 
       {/* ---- Play & Think ---- */}
       <section>
-        <h2 className="rise mb-5 flex items-center gap-2 text-2xl sm:text-3xl">
-          <span aria-hidden>🎮</span> Play &amp; Think
-        </h2>
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="rise mb-6">
+          <p
+            className="text-xs font-bold uppercase tracking-[0.18em]"
+            style={{ color: "var(--color-tangerine)" }}
+          >
+            Play together
+          </p>
+          <h2 className="mt-1 text-2xl sm:text-3xl">🎮 Play &amp; Think</h2>
+        </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
           {GAMES.map((t, i) => (
             <Tile key={t.href} {...t} index={i + 1} />
           ))}
         </div>
       </section>
 
-      <footer className="mt-14 pb-4 text-center text-xs font-bold opacity-50">
-        Icebreaker — a school project. Every game is original. Be kind, have
-        fun. 💛
+      <footer className="mt-16 border-t border-black/5 pt-6 pb-4 text-center text-xs font-semibold text-muted">
+        <Link
+          href="/poster"
+          className="font-bold text-ink underline decoration-dotted underline-offset-4"
+        >
+          🖼️ Project board (printable trifold)
+        </Link>
+        <p className="mt-2">
+          Icebreaker — a school project. Every game is original. Be kind, have
+          fun. 💛
+        </p>
       </footer>
     </div>
   );
