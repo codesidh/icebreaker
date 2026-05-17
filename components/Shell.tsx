@@ -11,7 +11,7 @@ export default function Shell({
   emoji: string;
   title: string;
   blurb?: string;
-  /** A candy-palette bg utility (e.g. "bg-bubble"); used as a tint. */
+  /** A candy-palette bg utility (e.g. "bg-bubble"); used as a glow tint. */
   accent?: string;
   children: ReactNode;
 }) {
@@ -21,18 +21,18 @@ export default function Shell({
   } as CSSProperties;
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-5 sm:px-6 sm:py-8">
-      <nav className="rise mb-6 flex items-center justify-between">
+    <div className="mx-auto w-full max-w-5xl px-4 py-5 sm:px-6 sm:py-7">
+      <nav className="rise glass sticky top-3 z-30 mb-6 flex items-center justify-between rounded-2xl px-3 py-2">
         <Link
           href="/"
-          className="btn btn-sm bg-paper text-ink"
+          className="btn btn-sm bg-white/5"
           aria-label="Back to home"
         >
           ← Back
         </Link>
         <Link
           href="/"
-          className="flex items-center gap-2 font-display text-lg font-bold tracking-tight"
+          className="flex items-center gap-2 pr-1 font-display text-lg font-bold tracking-tight"
         >
           <span aria-hidden>🧊</span> Icebreaker
         </Link>
@@ -42,16 +42,18 @@ export default function Shell({
         className="rise pop relative mb-8 overflow-hidden"
         style={{ ...accentStyle, animationDelay: "60ms" }}
       >
+        {/* accent glow wash */}
         <div
-          className="h-1.5 w-full"
+          className="pointer-events-none absolute -top-16 left-0 h-40 w-2/3 opacity-50 blur-3xl"
           style={{ background: "var(--accent)" }}
           aria-hidden
         />
-        <div className="flex items-center gap-4 px-5 py-5 sm:gap-5 sm:px-7 sm:py-6">
+        <div className="relative flex items-center gap-4 px-5 py-5 sm:gap-5 sm:px-7 sm:py-6">
           <span
-            className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-3xl sm:h-16 sm:w-16 sm:text-4xl"
+            className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-3xl ring-1 ring-white/15 sm:h-16 sm:w-16 sm:text-4xl"
             style={{
-              background: "color-mix(in srgb, var(--accent) 16%, white)",
+              background: "color-mix(in srgb, var(--accent) 26%, transparent)",
+              boxShadow: "0 10px 28px -10px var(--accent)",
             }}
             aria-hidden
           >
@@ -72,7 +74,7 @@ export default function Shell({
         {children}
       </main>
 
-      <footer className="mt-14 border-t border-black/5 pt-6 pb-4 text-center text-xs font-semibold text-muted">
+      <footer className="mt-14 border-t border-white/10 pt-6 pb-4 text-center text-xs font-semibold text-muted">
         Icebreaker — a school project, made to help people make friends. 💛
       </footer>
     </div>

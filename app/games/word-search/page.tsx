@@ -100,7 +100,7 @@ export default function WordSearchPage() {
                 newPuzzle(i);
               }}
               className={`btn btn-sm ${
-                themeIdx === i ? "bg-grape text-paper" : "bg-paper"
+                themeIdx === i ? "bg-grape text-ink" : "bg-paper"
               }`}
             >
               {t.emoji} {t.name}
@@ -136,7 +136,7 @@ export default function WordSearchPage() {
                         isFound
                           ? "bg-lime"
                           : isStart
-                            ? "bg-bubble text-paper"
+                            ? "bg-bubble text-ink"
                             : isReveal
                               ? "bg-sky/60"
                               : "hover:bg-sun"
@@ -161,7 +161,7 @@ export default function WordSearchPage() {
             {theme.words.map((w) => (
               <span
                 key={w}
-                className={`rounded-full border-[3px] border-ink px-3 py-1 text-sm font-extrabold ${
+                className={`rounded-full border border-white/20 px-3 py-1 text-sm font-extrabold ${
                   found.has(w)
                     ? "bg-lime line-through opacity-60"
                     : "bg-paper"

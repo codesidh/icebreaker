@@ -1,6 +1,6 @@
-import type { CSSProperties } from "react";
 import Link from "next/link";
 import Tile from "@/components/Tile";
+import StatStrip from "@/components/StatStrip";
 
 const ICEBREAKERS = [
   {
@@ -87,45 +87,52 @@ const GAMES = [
 
 export default function HomePage() {
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-      {/* ---- Brand bar ---- */}
-      <nav className="rise mb-10 flex items-center justify-between sm:mb-14">
+    <div className="mx-auto w-full max-w-5xl px-4 py-5 sm:px-6 sm:py-7">
+      {/* ---- Sticky glass nav ---- */}
+      <nav className="rise glass sticky top-3 z-30 mb-12 flex items-center justify-between rounded-2xl px-4 py-2.5 sm:mb-16">
         <span className="flex items-center gap-2 font-display text-lg font-bold tracking-tight">
           <span aria-hidden>🧊</span> Icebreaker
         </span>
-        <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-muted shadow-[0_1px_2px_rgba(29,27,48,0.06)] ring-1 ring-black/5">
+        <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-muted ring-1 ring-white/10">
           School project
         </span>
       </nav>
 
       {/* ---- Hero ---- */}
       <section className="rise mb-14 text-center sm:mb-20">
-        <p
-          className="mb-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-muted shadow-[0_1px_2px_rgba(29,27,48,0.06)] ring-1 ring-black/5 sm:text-sm"
-          style={
-            { ["--accent" as string]: "var(--color-grape)" } as CSSProperties
-          }
-        >
+        <p className="mb-6 inline-flex items-center gap-2 rounded-full bg-white/8 px-4 py-1.5 text-xs font-bold text-muted ring-1 ring-white/12 sm:text-sm">
           <span
-            className="inline-block h-2 w-2 rounded-full"
-            style={{ background: "var(--accent)" }}
+            className="inline-block h-2 w-2 animate-pulse rounded-full"
+            style={{ background: "var(--color-mint)" }}
             aria-hidden
           />
           A friendly way to make friends
         </p>
-        <h1 className="text-balance text-5xl font-bold leading-[1.05] sm:text-7xl">
-          Icebreaker<span style={{ color: "var(--color-grape)" }}>.</span>
+        <h1 className="text-balance text-5xl font-bold leading-[1.04] sm:text-7xl">
+          Make a <span className="text-gradient">friend</span> today.
         </h1>
-        <p className="mx-auto mt-5 max-w-xl text-balance text-base font-semibold text-muted sm:text-lg">
+        <p className="mx-auto mt-6 max-w-xl text-balance text-base font-semibold text-muted sm:text-lg">
           New at school or sitting alone at lunch? Pick a joke, a riddle, a big
-          question, or a game — it makes saying “hi” a whole lot easier.
+          question, or a game — Icebreaker makes saying “hi” a whole lot easier.
         </p>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <a
+            href="#explore"
+            className="btn bg-grape text-white"
+            style={{ boxShadow: "0 16px 38px -12px var(--color-grape)" }}
+          >
+            Explore the app →
+          </a>
+          <Link href="/poster" className="btn bg-white/8">
+            🖼️ Project board
+          </Link>
+        </div>
         <div className="mt-7 flex flex-wrap items-center justify-center gap-2.5 text-xs font-bold text-muted sm:text-sm">
           {["No sign-up", "Works on any device", "100% original games"].map(
             (chip) => (
               <span
                 key={chip}
-                className="rounded-full bg-white px-3.5 py-1.5 shadow-[0_1px_2px_rgba(29,27,48,0.06)] ring-1 ring-black/5"
+                className="rounded-full bg-white/6 px-3.5 py-1.5 ring-1 ring-white/10"
               >
                 {chip}
               </span>
@@ -134,8 +141,13 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ---- Animated stats ---- */}
+      <section className="rise mb-16" style={{ animationDelay: "120ms" }}>
+        <StatStrip />
+      </section>
+
       {/* ---- Break the Ice ---- */}
-      <section className="mb-14">
+      <section id="explore" className="mb-14 scroll-mt-24">
         <div className="rise mb-6">
           <p
             className="text-xs font-bold uppercase tracking-[0.18em]"
@@ -170,7 +182,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <footer className="mt-16 border-t border-black/5 pt-6 pb-4 text-center text-xs font-semibold text-muted">
+      <footer className="mt-16 border-t border-white/10 pt-6 pb-4 text-center text-xs font-semibold text-muted">
         <Link
           href="/poster"
           className="font-bold text-ink underline decoration-dotted underline-offset-4"

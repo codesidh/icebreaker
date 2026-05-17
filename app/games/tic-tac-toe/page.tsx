@@ -102,7 +102,7 @@ export default function TicTacToePage() {
                 reset();
               }}
               className={`btn btn-sm ${
-                difficulty === l.id ? "bg-grape text-paper" : "bg-paper"
+                difficulty === l.id ? "bg-grape text-ink" : "bg-paper"
               }`}
             >
               {l.label}

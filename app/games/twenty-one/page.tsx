@@ -81,13 +81,13 @@ export default function TwentyOnePage() {
         <div className="flex flex-wrap items-center justify-center gap-2">
           <button
             onClick={() => setSmart(false)}
-            className={`btn btn-sm ${!smart ? "bg-grape text-paper" : "bg-paper"}`}
+            className={`btn btn-sm ${!smart ? "bg-grape text-ink" : "bg-paper"}`}
           >
             😌 Chill computer
           </button>
           <button
             onClick={() => setSmart(true)}
-            className={`btn btn-sm ${smart ? "bg-grape text-paper" : "bg-paper"}`}
+            className={`btn btn-sm ${smart ? "bg-grape text-ink" : "bg-paper"}`}
           >
             😏 Tricky computer
           </button>
@@ -153,7 +153,7 @@ export default function TwentyOnePage() {
               always wins, so let the computer start!
             </p>
             {yourTurn ? (
-              <p className="mt-3 rounded-xl border-[3px] border-ink bg-paper p-3">
+              <p className="mt-3 rounded-xl border border-white/20 bg-paper p-3">
                 💡 {hintFor(count)}
               </p>
             ) : null}

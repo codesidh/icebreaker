@@ -58,7 +58,7 @@ export default function RevealDeck({
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <p className="rounded-full border-[3px] border-ink bg-paper px-4 py-1 text-sm font-extrabold">
+      <p className="rounded-full border border-white/20 bg-paper px-4 py-1 text-sm font-extrabold">
         #{seen} · {promptLabel}
       </p>
 

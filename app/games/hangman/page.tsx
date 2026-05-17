@@ -95,7 +95,7 @@ export default function HangmanPage() {
             You got it! 🎉
           </p>
         ) : lost ? (
-          <p className="pop pop-in bg-cherry px-6 py-3 font-display text-2xl font-bold text-paper">
+          <p className="pop pop-in bg-cherry px-6 py-3 font-display text-2xl font-bold text-ink">
             Out of balloons! The word was “{word}”.
           </p>
         ) : null}
@@ -113,7 +113,7 @@ export default function HangmanPage() {
                   used
                     ? right
                       ? "bg-lime"
-                      : "bg-cherry text-paper"
+                      : "bg-cherry text-ink"
                     : "bg-paper"
                 }`}
               >

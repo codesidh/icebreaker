@@ -151,7 +151,7 @@ export default function ConversationPage() {
               onChange={(e) => setWhy(e.target.value)}
               rows={3}
               placeholder="Say it out loud to a friend first… then jot the short version here."
-              className="w-full resize-none rounded-xl border-[3px] border-ink bg-paper p-3 font-semibold outline-none focus:bg-white"
+              className="w-full resize-none rounded-xl border border-white/15 bg-white/5 p-3 font-semibold text-ink outline-none transition-colors placeholder:text-muted focus:border-white/30 focus:bg-white/10"
             />
             <div className="mt-3 flex flex-wrap items-center gap-3">
               <button className="btn bg-lime" onClick={save}>
@@ -193,7 +193,7 @@ export default function ConversationPage() {
           <div className="w-full max-w-2xl">
             <div className="mb-3 flex items-center justify-between">
               <h2 className="text-xl">📋 Answer wall ({answers.length})</h2>
-              <button className="btn btn-sm bg-cherry text-paper" onClick={clearAll}>
+              <button className="btn btn-sm bg-cherry text-ink" onClick={clearAll}>
                 Clear all
               </button>
             </div>
@@ -205,7 +205,7 @@ export default function ConversationPage() {
                   </p>
                   <p className="mt-1 font-display text-lg font-bold">
                     <span
-                      className={`mr-2 inline-block rounded-full border-[3px] border-ink px-2 py-0.5 text-sm ${
+                      className={`mr-2 inline-block rounded-full border border-white/20 px-2 py-0.5 text-sm ${
                         a.side === "A" ? "bg-sky" : "bg-tangerine"
                       }`}
                     >
@@ -248,7 +248,7 @@ function Bar({
           {count} · {pct}%
         </span>
       </div>
-      <div className="h-6 w-full overflow-hidden rounded-full border-[3px] border-ink bg-white">
+      <div className="h-6 w-full overflow-hidden rounded-full border border-white/15 bg-white/5">
         <div
           className={`h-full ${color} transition-all duration-500`}
           style={{ width: `${pct}%` }}

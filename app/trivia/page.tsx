@@ -56,10 +56,10 @@ export default function TriviaPage() {
     >
       <div className="flex flex-col items-center gap-6">
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <span className="rounded-full border-[3px] border-ink bg-grape px-4 py-1 text-sm font-extrabold text-paper">
+          <span className="rounded-full border border-white/20 bg-grape px-4 py-1 text-sm font-extrabold text-ink">
             {q.category}
           </span>
-          <span className="rounded-full border-[3px] border-ink bg-paper px-4 py-1 text-sm font-extrabold">
+          <span className="rounded-full border border-white/20 bg-paper px-4 py-1 text-sm font-extrabold">
             Score: {score}/{answered}
           </span>
         </div>
@@ -80,7 +80,7 @@ export default function TriviaPage() {
             let tone = "bg-paper";
             if (picked !== null) {
               if (isAnswer) tone = "bg-lime";
-              else if (isPicked) tone = "bg-cherry text-paper";
+              else if (isPicked) tone = "bg-cherry text-ink";
               else tone = "bg-paper opacity-60";
             }
             return (

@@ -1,31 +1,32 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Icebreaker design system — "friendly, but polished".
-   A calm, modern product look: harmonized palette, soft layered
-   elevation (no harsh outlines), restrained motion, accessible
-   focus states. Class and token names are kept stable so every
-   page and game inherits the new look untouched.
+   Icebreaker — "Premium Dark, Playful".
+   A deep night-indigo canvas, frosted-glass surfaces, soft
+   colored glow, vivid-but-friendly accents, restrained motion.
+   Inspired by high-end product UI — tuned for kids, not crypto.
+   Token + class names are stable so every page/game inherits it.
    ============================================================ */
 
 @theme {
   --font-display: var(--font-fredoka), "Trebuchet MS", system-ui, sans-serif;
   --font-body: var(--font-nunito), system-ui, sans-serif;
 
-  --color-cream: #f5f5fb;
-  --color-paper: #ffffff;
-  --color-ink: #1d1b30;
-  --color-muted: #5d5a72;
+  /* Surfaces */
+  --color-cream: #0b0918; /* page background (deep indigo-black) */
+  --color-paper: rgba(255, 255, 255, 0.05); /* glass surface fill */
+  --color-ink: #f3f1ff; /* primary text + hairline borders (LIGHT) */
+  --color-muted: #a7a2cf; /* secondary text */
 
-  /* Harmonized accent set — similar saturation/lightness so the
-     whole app feels designed, not random. */
-  --color-grape: #5b5bd6; /* primary brand */
-  --color-sky: #2e90fa;
-  --color-mint: #11b3a3;
-  --color-lime: #2fb24d;
-  --color-sun: #f3a712;
-  --color-tangerine: #f5803e;
-  --color-bubble: #e85aa0;
+  /* Accents — vivid, friendly, glow well on dark; deep enough
+     that the light primary text stays readable on top. */
+  --color-grape: #7c5cff; /* primary brand */
+  --color-sky: #2f8fe0;
+  --color-mint: #15b8a6;
+  --color-lime: #5fae26;
+  --color-sun: #c2901f;
+  --color-tangerine: #ef7322;
+  --color-bubble: #e0559b;
   --color-cherry: #e5484d;
 
   --radius-blob: 1.15rem;
@@ -33,7 +34,7 @@
 
 @layer base {
   :root {
-    color-scheme: light;
+    color-scheme: dark;
   }
 
   * {
@@ -53,16 +54,22 @@
     font-family: var(--font-body);
     color: var(--color-ink);
     background-color: var(--color-cream);
+    /* Soft colored glow pools — the premium "atmosphere". */
     background-image:
       radial-gradient(
-        900px 480px at 50% -160px,
-        color-mix(in srgb, var(--color-grape) 14%, transparent),
+        780px 520px at 50% -180px,
+        rgba(124, 92, 255, 0.32),
         transparent 70%
       ),
       radial-gradient(
-        680px 460px at 100% 0,
-        color-mix(in srgb, var(--color-sky) 9%, transparent),
+        620px 480px at 100% 4%,
+        rgba(47, 143, 224, 0.22),
         transparent 62%
+      ),
+      radial-gradient(
+        680px 520px at 0% 90%,
+        rgba(224, 85, 155, 0.18),
+        transparent 64%
       );
     background-attachment: fixed;
     -webkit-font-smoothing: antialiased;
@@ -82,28 +89,32 @@
 
   :focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-grape) 42%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-grape) 55%, transparent);
     border-radius: 0.4rem;
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--color-grape) 22%, transparent);
-    color: var(--color-ink);
+    background: color-mix(in srgb, var(--color-grape) 38%, transparent);
+    color: #fff;
   }
 }
 
 @layer components {
-  /* Elevated surface — soft, layered shadow instead of a hard outline. */
+  /* Frosted-glass surface. A bg-<accent>/bg-paper utility may
+     override the fill; the border, blur, and depth always apply. */
   .pop {
+    position: relative;
     background: var(--color-paper);
-    border: 1px solid rgba(29, 27, 48, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-blob);
     box-shadow:
-      0 1px 2px rgba(29, 27, 48, 0.05),
-      0 12px 30px -16px rgba(29, 27, 48, 0.28);
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 22px 48px -24px rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
   }
 
-  /* Buttons get their fill from utility classes (e.g. bg-grape). */
+  /* Buttons take their fill from utilities (e.g. bg-grape). */
   .btn {
     display: inline-flex;
     align-items: center;
@@ -112,12 +123,12 @@
     font-family: var(--font-display);
     font-weight: 600;
     color: inherit;
-    border: 1px solid rgba(29, 27, 48, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 0.8rem;
-    padding: 0.7rem 1.25rem;
+    padding: 0.7rem 1.3rem;
     box-shadow:
-      0 1px 2px rgba(29, 27, 48, 0.08),
-      0 8px 18px -12px rgba(29, 27, 48, 0.45);
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      0 10px 24px -14px rgba(0, 0, 0, 0.8);
     transition:
       transform 0.16s ease,
       box-shadow 0.16s ease,
@@ -128,36 +139,36 @@
 
   .btn:hover {
     transform: translateY(-1px);
-    filter: brightness(1.03);
+    filter: brightness(1.08) saturate(1.05);
     box-shadow:
-      0 2px 4px rgba(29, 27, 48, 0.1),
-      0 14px 24px -12px rgba(29, 27, 48, 0.5);
+      inset 0 1px 0 rgba(255, 255, 255, 0.16),
+      0 16px 30px -14px rgba(0, 0, 0, 0.85);
   }
 
   .btn:active {
     transform: translateY(0);
-    box-shadow: 0 1px 2px rgba(29, 27, 48, 0.12);
+    filter: brightness(0.98);
   }
 
   .btn:disabled {
-    opacity: 0.45;
+    opacity: 0.4;
     cursor: not-allowed;
     transform: none;
     filter: none;
   }
 
   .btn-sm {
-    padding: 0.45rem 0.85rem;
+    padding: 0.45rem 0.9rem;
     font-size: 0.875rem;
     border-radius: 0.65rem;
   }
 
   /* Tappable square — game cells, number pads, letter keys. */
   .chip {
-    background: var(--color-paper);
-    border: 1px solid rgba(29, 27, 48, 0.12);
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 0.7rem;
-    box-shadow: 0 1px 2px rgba(29, 27, 48, 0.05);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
     transition:
       transform 0.12s ease,
       box-shadow 0.12s ease,
@@ -168,13 +179,12 @@
 
   .chip:hover:not(:disabled) {
     transform: translateY(-1px);
-    border-color: rgba(29, 27, 48, 0.22);
-    box-shadow: 0 6px 14px -8px rgba(29, 27, 48, 0.3);
+    border-color: rgba(255, 255, 255, 0.28);
+    box-shadow: 0 8px 18px -8px rgba(0, 0, 0, 0.7);
   }
 
   .chip:active:not(:disabled) {
     transform: translateY(0);
-    box-shadow: 0 1px 2px rgba(29, 27, 48, 0.1);
   }
 
   .chip:disabled {
@@ -187,7 +197,26 @@
     text-wrap: balance;
   }
 
-  /* Entrance: gentle fade + rise. Pair with inline animation-delay. */
+  /* Vibrant gradient text — used for the hero keyword. */
+  .text-gradient {
+    background-image: linear-gradient(
+      120deg,
+      #9b8cff 0%,
+      #ec6fb6 48%,
+      #46c0ff 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+  }
+
   .rise {
     opacity: 0;
     animation: rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -217,7 +246,6 @@
     }
   }
 
-  /* Subtle hover/idle drift for decorative marks. */
   .float {
     animation: float 6s ease-in-out infinite;
   }

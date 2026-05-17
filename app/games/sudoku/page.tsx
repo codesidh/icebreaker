@@ -98,7 +98,7 @@ export default function SudokuPage() {
                 make(l.id);
               }}
               className={`btn btn-sm ${
-                difficulty === l.id ? "bg-grape text-paper" : "bg-paper"
+                difficulty === l.id ? "bg-grape text-ink" : "bg-paper"
               }`}
             >
               {l.label}
@@ -117,8 +117,8 @@ export default function SudokuPage() {
             Shuffling a fresh puzzle… 🔀
           </p>
         ) : (
-          <div className="pop w-full max-w-[min(92vw,26rem)] bg-ink p-1.5 sm:p-2">
-            <div className="grid aspect-square grid-cols-9 gap-[2px] bg-ink">
+          <div className="pop w-full max-w-[min(92vw,26rem)] p-1.5 sm:p-2">
+            <div className="grid aspect-square grid-cols-9 gap-[2px] overflow-hidden rounded-lg bg-white/15">
               {values.map((row, r) =>
                 row.map((val, c) => {
                   const given = puzzle[r][c] !== 0;
@@ -134,14 +134,14 @@ export default function SudokuPage() {
                       onClick={() => setSel([r, c])}
                       className={`flex aspect-square w-full items-center justify-center text-[clamp(0.85rem,4.4vw,1.35rem)] font-extrabold ${
                         given
-                          ? "bg-cream text-ink"
+                          ? "bg-white/12 font-black text-ink"
                           : isBad
-                            ? "bg-cherry text-paper"
+                            ? "bg-cherry text-ink"
                             : selected
-                              ? "bg-sun"
+                              ? "bg-sun text-ink"
                               : sameLine
-                                ? "bg-sun/40"
-                                : "bg-paper"
+                                ? "bg-sun/20 text-ink"
+                                : "bg-white/[0.03] text-ink"
                       }`}
                       style={{
                         marginBottom: thickR ? 3 : 0,
@@ -178,7 +178,7 @@ export default function SudokuPage() {
         </div>
 
         <button
-          className="btn bg-grape text-paper text-lg"
+          className="btn bg-grape text-ink text-lg"
           onClick={() => make(difficulty)}
         >
           New puzzle 🔄

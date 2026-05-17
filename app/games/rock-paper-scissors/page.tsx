@@ -85,7 +85,7 @@ export default function RpsPage() {
             <div className="text-2xl">{score.you}</div>
             <div className="text-xs uppercase">You</div>
           </span>
-          <span className="pop bg-cherry px-6 py-2 text-center text-paper">
+          <span className="pop bg-cherry px-6 py-2 text-center text-ink">
             <div className="text-2xl">{score.cpu}</div>
             <div className="text-xs uppercase">Computer</div>
           </span>
