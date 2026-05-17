@@ -107,7 +107,7 @@ export default function SudokuPage() {
         </div>
 
         {solved ? (
-          <p className="pop pop-in bg-sun px-6 py-3 font-display text-2xl font-bold">
+          <p className="pop tint-sun pop-in px-6 py-3 font-display text-2xl font-bold">
             Solved it! 🎉 Brain = powerful 🧠
           </p>
         ) : null}
@@ -136,11 +136,11 @@ export default function SudokuPage() {
                         given
                           ? "bg-white/12 font-black text-ink"
                           : isBad
-                            ? "bg-cherry text-ink"
+                            ? "sel-cherry"
                             : selected
-                              ? "bg-sun text-ink"
+                              ? "sel-sky"
                               : sameLine
-                                ? "bg-sun/20 text-ink"
+                                ? "bg-white/[0.07] text-ink"
                                 : "bg-white/[0.03] text-ink"
                       }`}
                       style={{

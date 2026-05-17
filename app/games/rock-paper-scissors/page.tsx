@@ -81,31 +81,31 @@ export default function RpsPage() {
       <Confetti seed={wins} />
       <div className="flex flex-col items-center gap-6">
         <div className="flex gap-3 font-display font-bold">
-          <span className="pop bg-lime px-6 py-2 text-center">
+          <span className="pop tint-lime px-6 py-2 text-center">
             <div className="text-2xl">{score.you}</div>
             <div className="text-xs uppercase">You</div>
           </span>
-          <span className="pop bg-cherry px-6 py-2 text-center text-ink">
+          <span className="pop tint-cherry px-6 py-2 text-center">
             <div className="text-2xl">{score.cpu}</div>
             <div className="text-xs uppercase">Computer</div>
           </span>
         </div>
 
         <div className="flex items-center gap-4 sm:gap-6">
-          <div className="pop flex aspect-square w-[min(26vw,7rem)] items-center justify-center bg-paper text-[min(13vw,3.5rem)]">
+          <div className="pop flex aspect-square w-[min(26vw,7rem)] items-center justify-center text-[min(13vw,3.5rem)]">
             <span className={you ? "pop-in" : "opacity-30"}>
               {you ? MOVES.find((m) => m.id === you)!.emoji : "❔"}
             </span>
           </div>
           <span className="font-display text-2xl font-bold">vs</span>
-          <div className="pop flex aspect-square w-[min(26vw,7rem)] items-center justify-center bg-paper text-[min(13vw,3.5rem)]">
+          <div className="pop flex aspect-square w-[min(26vw,7rem)] items-center justify-center text-[min(13vw,3.5rem)]">
             <span className={cpu ? "pop-in" : "opacity-30"}>
               {cpu ? MOVES.find((m) => m.id === cpu)!.emoji : "❔"}
             </span>
           </div>
         </div>
 
-        <p className="pop bg-sun px-6 py-2 font-display text-lg font-bold">
+        <p className="pop tint-sky px-6 py-2 font-display text-lg font-bold">
           {msg}
         </p>
 

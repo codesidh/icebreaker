@@ -56,10 +56,10 @@ export default function TriviaPage() {
     >
       <div className="flex flex-col items-center gap-6">
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <span className="rounded-full border border-white/20 bg-grape px-4 py-1 text-sm font-extrabold text-ink">
+          <span className="tint-grape rounded-full border px-4 py-1 text-sm font-extrabold">
             {q.category}
           </span>
-          <span className="rounded-full border border-white/20 bg-paper px-4 py-1 text-sm font-extrabold">
+          <span className="rounded-full border border-white/15 bg-white/5 px-4 py-1 text-sm font-extrabold text-muted">
             Score: {score}/{answered}
           </span>
         </div>
@@ -77,11 +77,11 @@ export default function TriviaPage() {
           {q.options.map((opt, i) => {
             const isAnswer = i === q.answer;
             const isPicked = i === picked;
-            let tone = "bg-paper";
+            let tone = "";
             if (picked !== null) {
-              if (isAnswer) tone = "bg-lime";
-              else if (isPicked) tone = "bg-cherry text-ink";
-              else tone = "bg-paper opacity-60";
+              if (isAnswer) tone = "sel-lime";
+              else if (isPicked) tone = "sel-cherry";
+              else tone = "opacity-45";
             }
             return (
               <button
@@ -102,7 +102,7 @@ export default function TriviaPage() {
         </div>
 
         {picked !== null ? (
-          <div className="pop pop-in w-full max-w-2xl bg-sun p-5 text-center">
+          <div className="pop tint-sun pop-in w-full max-w-2xl p-5 text-center">
             <p className="text-xs font-extrabold uppercase tracking-widest opacity-70">
               {picked === q.answer ? "Nice! 🎉" : "Good try!"} Fun fact
             </p>

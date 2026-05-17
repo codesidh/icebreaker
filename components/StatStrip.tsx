@@ -11,7 +11,7 @@ const STATS = [
   { value: RIDDLES.length, label: "Riddles", suffix: "+", color: "var(--color-lime)" },
   { value: TRIVIA.length, label: "Trivia facts", suffix: "+", color: "var(--color-sky)" },
   { value: OPINION_QUESTIONS.length, label: "Big questions", suffix: "+", color: "var(--color-bubble)" },
-  { value: 7, label: "Original games", suffix: "", color: "var(--color-grape)" },
+  { value: 10, label: "Original games", suffix: "", color: "var(--color-grape)" },
 ];
 
 function useCountUp(target: number, run: boolean, ms = 1100) {

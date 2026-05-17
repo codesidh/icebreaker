@@ -70,7 +70,7 @@ export default function HangmanPage() {
           ))}
         </div>
 
-        <div className="pop bg-sky px-5 py-3 text-center font-display font-bold">
+        <div className="pop tint-sky px-5 py-3 text-center font-display font-bold">
           Hint: {entry.hint}
         </div>
 
@@ -80,8 +80,8 @@ export default function HangmanPage() {
             return (
               <span
                 key={i}
-                className={`flex h-14 w-11 items-center justify-center rounded-lg border-b-[5px] border-ink text-3xl font-extrabold ${
-                  show ? "bg-paper pop-in" : "bg-cream"
+                className={`flex h-14 w-11 items-center justify-center rounded-lg border-b-2 border-white/25 text-3xl font-extrabold ${
+                  show ? "bg-white/[0.06] pop-in" : "bg-transparent"
                 } ${lost && !guessed.has(l) ? "text-cherry" : ""}`}
               >
                 {show ? l : ""}
@@ -91,11 +91,11 @@ export default function HangmanPage() {
         </div>
 
         {won ? (
-          <p className="pop pop-in bg-lime px-6 py-3 font-display text-2xl font-bold">
+          <p className="pop tint-lime pop-in px-6 py-3 font-display text-2xl font-bold">
             You got it! 🎉
           </p>
         ) : lost ? (
-          <p className="pop pop-in bg-cherry px-6 py-3 font-display text-2xl font-bold text-ink">
+          <p className="pop tint-cherry pop-in px-6 py-3 font-display text-2xl font-bold">
             Out of balloons! The word was “{word}”.
           </p>
         ) : null}
@@ -110,11 +110,7 @@ export default function HangmanPage() {
                 onClick={() => guess(l)}
                 disabled={used || over}
                 className={`chip h-10 w-10 text-base font-extrabold disabled:cursor-default ${
-                  used
-                    ? right
-                      ? "bg-lime"
-                      : "bg-cherry text-ink"
-                    : "bg-paper"
+                  used ? (right ? "sel-lime" : "sel-cherry") : ""
                 }`}
               >
                 {l}

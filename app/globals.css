@@ -190,6 +190,118 @@
   .chip:disabled {
     cursor: default;
   }
+
+  /* ---------------------------------------------------------
+     Standardized accent surfaces. Instead of loud solid fills,
+     accents appear as a soft tinted glass with a faint ring —
+     subtle and consistent across every page. Defined AFTER
+     .pop/.chip so they override those backgrounds.
+       .tint-*  → quiet info / reveal / pill
+       .sel-*   → active / selected / correct / wrong (a touch
+                  stronger, with a soft accent glow)
+     --------------------------------------------------------- */
+  .tint-sun,
+  .tint-lime,
+  .tint-sky,
+  .tint-grape,
+  .tint-tangerine,
+  .tint-bubble,
+  .tint-cherry,
+  .tint-mint,
+  .sel-sun,
+  .sel-lime,
+  .sel-sky,
+  .sel-grape,
+  .sel-tangerine,
+  .sel-bubble,
+  .sel-cherry,
+  .sel-mint {
+    color: var(--color-ink);
+  }
+
+  .tint-sun {
+    background: color-mix(in srgb, var(--color-sun) 14%, transparent);
+    border-color: color-mix(in srgb, var(--color-sun) 36%, transparent);
+  }
+  .tint-lime {
+    background: color-mix(in srgb, var(--color-lime) 14%, transparent);
+    border-color: color-mix(in srgb, var(--color-lime) 36%, transparent);
+  }
+  .tint-sky {
+    background: color-mix(in srgb, var(--color-sky) 15%, transparent);
+    border-color: color-mix(in srgb, var(--color-sky) 38%, transparent);
+  }
+  .tint-grape {
+    background: color-mix(in srgb, var(--color-grape) 16%, transparent);
+    border-color: color-mix(in srgb, var(--color-grape) 40%, transparent);
+  }
+  .tint-tangerine {
+    background: color-mix(in srgb, var(--color-tangerine) 15%, transparent);
+    border-color: color-mix(in srgb, var(--color-tangerine) 38%, transparent);
+  }
+  .tint-bubble {
+    background: color-mix(in srgb, var(--color-bubble) 15%, transparent);
+    border-color: color-mix(in srgb, var(--color-bubble) 38%, transparent);
+  }
+  .tint-cherry {
+    background: color-mix(in srgb, var(--color-cherry) 15%, transparent);
+    border-color: color-mix(in srgb, var(--color-cherry) 40%, transparent);
+  }
+  .tint-mint {
+    background: color-mix(in srgb, var(--color-mint) 15%, transparent);
+    border-color: color-mix(in srgb, var(--color-mint) 38%, transparent);
+  }
+
+  .sel-sun,
+  .sel-lime,
+  .sel-sky,
+  .sel-grape,
+  .sel-tangerine,
+  .sel-bubble,
+  .sel-cherry,
+  .sel-mint {
+    border-width: 1px;
+  }
+  .sel-sun {
+    background: color-mix(in srgb, var(--color-sun) 28%, transparent);
+    border-color: color-mix(in srgb, var(--color-sun) 75%, transparent);
+    box-shadow: 0 12px 30px -14px var(--color-sun);
+  }
+  .sel-lime {
+    background: color-mix(in srgb, var(--color-lime) 28%, transparent);
+    border-color: color-mix(in srgb, var(--color-lime) 75%, transparent);
+    box-shadow: 0 12px 30px -14px var(--color-lime);
+  }
+  .sel-sky {
+    background: color-mix(in srgb, var(--color-sky) 30%, transparent);
+    border-color: color-mix(in srgb, var(--color-sky) 78%, transparent);
+    box-shadow: 0 12px 30px -14px var(--color-sky);
+  }
+  .sel-grape {
+    background: color-mix(in srgb, var(--color-grape) 32%, transparent);
+    border-color: color-mix(in srgb, var(--color-grape) 80%, transparent);
+    box-shadow: 0 12px 30px -14px var(--color-grape);
+  }
+  .sel-tangerine {
+    background: color-mix(in srgb, var(--color-tangerine) 30%, transparent);
+    border-color: color-mix(in srgb, var(--color-tangerine) 78%, transparent);
+    box-shadow: 0 12px 30px -14px var(--color-tangerine);
+  }
+  .sel-bubble {
+    background: color-mix(in srgb, var(--color-bubble) 30%, transparent);
+    border-color: color-mix(in srgb, var(--color-bubble) 78%, transparent);
+    box-shadow: 0 12px 30px -14px var(--color-bubble);
+  }
+  .sel-cherry {
+    background: color-mix(in srgb, var(--color-cherry) 30%, transparent);
+    border-color: color-mix(in srgb, var(--color-cherry) 78%, transparent);
+    box-shadow: 0 12px 30px -14px var(--color-cherry);
+  }
+  .sel-mint {
+    background: color-mix(in srgb, var(--color-mint) 30%, transparent);
+    border-color: color-mix(in srgb, var(--color-mint) 78%, transparent);
+    box-shadow: 0 12px 30px -14px var(--color-mint);
+  }
 }
 
 @layer utilities {

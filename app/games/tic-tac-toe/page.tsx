@@ -102,7 +102,7 @@ export default function TicTacToePage() {
                 reset();
               }}
               className={`btn btn-sm ${
-                difficulty === l.id ? "bg-grape text-ink" : "bg-paper"
+                difficulty === l.id ? "bg-grape text-white" : "bg-white/8"
               }`}
             >
               {l.label}
@@ -110,7 +110,7 @@ export default function TicTacToePage() {
           ))}
         </div>
 
-        <p className="pop bg-sun px-6 py-2 font-display text-lg font-bold">
+        <p className="pop tint-sky px-6 py-2 font-display text-lg font-bold">
           {status}
         </p>
 
@@ -123,7 +123,7 @@ export default function TicTacToePage() {
                 onClick={() => play(i)}
                 disabled={!!cell || over || turn !== "human"}
                 className={`chip flex aspect-square w-[min(26vw,7rem)] items-center justify-center text-[min(13vw,3.5rem)] font-extrabold ${
-                  highlight ? "bg-lime" : "bg-paper"
+                  highlight ? "sel-lime" : ""
                 } ${cell === "X" ? "text-bubble" : "text-sky"}`}
               >
                 <span className={cell ? "pop-in" : ""}>{cell}</span>
@@ -137,9 +137,9 @@ export default function TicTacToePage() {
         </button>
 
         <div className="flex gap-3 text-center font-display font-bold">
-          <Stat label="You" value={score.you} color="bg-lime" />
-          <Stat label="Draws" value={score.draw} color="bg-sun" />
-          <Stat label="Computer" value={score.ai} color="bg-cherry" />
+          <Stat label="You" value={score.you} color="tint-lime" />
+          <Stat label="Draws" value={score.draw} color="tint-sun" />
+          <Stat label="Computer" value={score.ai} color="tint-cherry" />
         </div>
       </div>
     </Shell>

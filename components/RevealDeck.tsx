@@ -42,6 +42,8 @@ export default function RevealDeck({
   }, [items]);
 
   const item = items[order[pos]] ?? items[0];
+  // Soft tinted glass instead of a loud solid fill.
+  const answerTint = answerColor.replace(/^bg-/, "tint-");
 
   const next = useCallback(() => {
     setRevealed(false);
@@ -74,7 +76,7 @@ export default function RevealDeck({
       {revealed ? (
         <div
           key={`a-${pos}`}
-          className={`pop pop-in w-full max-w-2xl ${answerColor} p-6 text-center sm:p-8`}
+          className={`pop pop-in w-full max-w-2xl ${answerTint} p-6 text-center sm:p-8`}
         >
           <p className="mb-1 text-xs font-extrabold uppercase tracking-widest opacity-70">
             {answerLabel}

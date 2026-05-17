@@ -81,13 +81,13 @@ export default function TwentyOnePage() {
         <div className="flex flex-wrap items-center justify-center gap-2">
           <button
             onClick={() => setSmart(false)}
-            className={`btn btn-sm ${!smart ? "bg-grape text-ink" : "bg-paper"}`}
+            className={`btn btn-sm ${!smart ? "bg-grape text-white" : "bg-white/8"}`}
           >
             😌 Chill computer
           </button>
           <button
             onClick={() => setSmart(true)}
-            className={`btn btn-sm ${smart ? "bg-grape text-ink" : "bg-paper"}`}
+            className={`btn btn-sm ${smart ? "bg-grape text-white" : "bg-white/8"}`}
           >
             😏 Tricky computer
           </button>
@@ -104,7 +104,11 @@ export default function TwentyOnePage() {
         </div>
 
         {over ? (
-          <p className="pop pop-in bg-sun px-6 py-3 font-display text-2xl font-bold">
+          <p
+            className={`pop pop-in px-6 py-3 font-display text-2xl font-bold ${
+              loser === "computer" ? "tint-lime" : "tint-cherry"
+            }`}
+          >
             {loser === "computer"
               ? "You win! The computer said 21 🎉"
               : "You said 21 — computer wins 🤖"}
@@ -136,7 +140,7 @@ export default function TwentyOnePage() {
             New game ({first === "you" ? "computer" : "you"} starts) 🔄
           </button>
           <button
-            className="btn btn-sm bg-paper"
+            className="btn btn-sm bg-white/8"
             onClick={() => setShowTrick((s) => !s)}
           >
             {showTrick ? "Hide the trick" : "Show me the trick 🪄"}
@@ -144,7 +148,7 @@ export default function TwentyOnePage() {
         </div>
 
         {showTrick ? (
-          <div className="pop pop-in w-full max-w-xl bg-lime p-5 text-sm font-bold sm:text-base">
+          <div className="pop tint-lime pop-in w-full max-w-xl p-5 text-sm font-bold sm:text-base">
             <p className="mb-2 font-display text-lg">🪄 The secret</p>
             <p>
               Try to land the count on <b>4, 8, 12, 16, or 20</b>. If you do,

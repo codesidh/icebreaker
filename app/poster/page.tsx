@@ -207,7 +207,7 @@ export default function PosterPage() {
             </div>
 
             <div className="grid grid-cols-3 gap-2 text-center text-xs font-bold">
-              {["🆓 Free", "📵 No login", "🎮 7 games"].map((t) => (
+              {["🆓 Free", "📵 No login", "🎮 10 games"].map((t) => (
                 <span
                   key={t}
                   className="rounded-lg px-2 py-2"
@@ -241,9 +241,10 @@ export default function PosterPage() {
             </Block>
 
             <Block icon="🎮" title="Play &amp; Think" color={C.bubble}>
-              7 original games: Tic-Tac-Toe, Count&nbsp;to&nbsp;21, Word
-              Search, Sudoku, Memory Match, Hangman,
-              Rock&nbsp;Paper&nbsp;Scissors. <b>No copied games.</b>
+              10 original games — Tic-Tac-Toe, Count&nbsp;to&nbsp;21, Word
+              Search, Sudoku, Memory Match, Hangman, Rock&nbsp;Paper&nbsp;Scissors,
+              and learning games: Math&nbsp;Sprint, Memory&nbsp;Sequence,
+              Slide&nbsp;Puzzle. <b>No copied games.</b>
             </Block>
 
             <Block icon="☁️" title="We Used the Cloud" color={C.grape}>

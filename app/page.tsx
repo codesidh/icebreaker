@@ -83,6 +83,27 @@ const GAMES = [
     blurb: "Best of 5 against the computer.",
     color: "bg-mint",
   },
+  {
+    href: "/games/math-sprint",
+    emoji: "⚡",
+    title: "Math Sprint",
+    blurb: "Beat the clock with mental math. 3 levels.",
+    color: "bg-mint",
+  },
+  {
+    href: "/games/memory-sequence",
+    emoji: "🎵",
+    title: "Memory Sequence",
+    blurb: "Watch & repeat the growing pattern.",
+    color: "bg-grape",
+  },
+  {
+    href: "/games/slide-puzzle",
+    emoji: "🔀",
+    title: "Slide Puzzle",
+    blurb: "Slide the numbers back into order.",
+    color: "bg-sky",
+  },
 ];
 
 export default function HomePage() {

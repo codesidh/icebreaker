@@ -108,14 +108,14 @@ export default function MemoryPage() {
       <Confetti seed={wins} />
       <div className="flex flex-col items-center gap-6">
         <div className="flex gap-3 font-display font-bold">
-          <span className="pop bg-sun px-5 py-2">Moves: {moves}</span>
-          <span className="pop bg-lime px-5 py-2">
+          <span className="pop tint-sun px-5 py-2">Moves: {moves}</span>
+          <span className="pop tint-lime px-5 py-2">
             Pairs: {cards.filter((c) => c.matched).length / 2} / {FACES.length}
           </span>
         </div>
 
         {won ? (
-          <p className="pop pop-in bg-sun px-6 py-3 font-display text-2xl font-bold">
+          <p className="pop tint-lime pop-in px-6 py-3 font-display text-2xl font-bold">
             You matched them all in {moves} moves! 🎉
           </p>
         ) : null}
@@ -130,10 +130,10 @@ export default function MemoryPage() {
                 disabled={up || lock}
                 className={`chip flex aspect-square w-[min(20vw,5.5rem)] items-center justify-center text-[min(9vw,2.5rem)] ${
                   card.matched
-                    ? "bg-lime"
+                    ? "sel-lime"
                     : up
-                      ? "bg-paper"
-                      : "bg-grape"
+                      ? "bg-white/[0.07]"
+                      : "tint-grape"
                 }`}
               >
                 <span className={up ? "pop-in" : ""}>

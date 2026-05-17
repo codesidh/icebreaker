@@ -123,11 +123,7 @@ export default function ConversationPage() {
                 key={s}
                 onClick={() => setSide(s)}
                 className={`chip px-5 py-5 text-lg font-extrabold ${
-                  active
-                    ? s === "A"
-                      ? "bg-sky"
-                      : "bg-tangerine"
-                    : "bg-paper"
+                  active ? (s === "A" ? "sel-sky" : "sel-tangerine") : ""
                 }`}
               >
                 {active ? "✔ " : ""}
@@ -138,7 +134,7 @@ export default function ConversationPage() {
         </div>
 
         {side ? (
-          <div className="pop pop-in w-full max-w-2xl bg-sun p-5">
+          <div className="pop tint-sun pop-in w-full max-w-2xl p-5">
             <label
               htmlFor="why"
               className="mb-2 block font-display text-lg font-bold"
@@ -205,8 +201,8 @@ export default function ConversationPage() {
                   </p>
                   <p className="mt-1 font-display text-lg font-bold">
                     <span
-                      className={`mr-2 inline-block rounded-full border border-white/20 px-2 py-0.5 text-sm ${
-                        a.side === "A" ? "bg-sky" : "bg-tangerine"
+                      className={`mr-2 inline-block rounded-full border px-2 py-0.5 text-sm ${
+                        a.side === "A" ? "tint-sky" : "tint-tangerine"
                       }`}
                     >
                       {a.sideLabel}

@@ -100,7 +100,7 @@ export default function WordSearchPage() {
                 newPuzzle(i);
               }}
               className={`btn btn-sm ${
-                themeIdx === i ? "bg-grape text-ink" : "bg-paper"
+                themeIdx === i ? "bg-grape text-white" : "bg-white/8"
               }`}
             >
               {t.emoji} {t.name}
@@ -109,7 +109,7 @@ export default function WordSearchPage() {
         </div>
 
         {won ? (
-          <p className="pop pop-in bg-sun px-6 py-3 font-display text-2xl font-bold">
+          <p className="pop tint-lime pop-in px-6 py-3 font-display text-2xl font-bold">
             You found them all! 🎉
           </p>
         ) : null}
@@ -134,12 +134,12 @@ export default function WordSearchPage() {
                       onClick={() => tap(r, c)}
                       className={`flex aspect-square w-full items-center justify-center rounded-md text-[clamp(0.6rem,2.7vw,0.95rem)] font-extrabold transition-colors ${
                         isFound
-                          ? "bg-lime"
+                          ? "tint-lime"
                           : isStart
-                            ? "bg-bubble text-ink"
+                            ? "sel-bubble"
                             : isReveal
-                              ? "bg-sky/60"
-                              : "hover:bg-sun"
+                              ? "tint-sky"
+                              : "text-ink/80 hover:bg-white/10"
                       }`}
                     >
                       {ch}
@@ -161,10 +161,10 @@ export default function WordSearchPage() {
             {theme.words.map((w) => (
               <span
                 key={w}
-                className={`rounded-full border border-white/20 px-3 py-1 text-sm font-extrabold ${
+                className={`rounded-full border px-3 py-1 text-sm font-extrabold ${
                   found.has(w)
-                    ? "bg-lime line-through opacity-60"
-                    : "bg-paper"
+                    ? "tint-lime line-through opacity-70"
+                    : "border-white/15 bg-white/5 text-muted"
                 }`}
               >
                 {w}

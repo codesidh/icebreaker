@@ -18,6 +18,9 @@ It has two parts:
 | **Riddles** — stump a friend, then say "aha!" | **Word Search** — 6 themes, tap-to-find |
 | **Conversation Starters** — pick a side, say *why*, and your answers get saved so you can compare with friends | **Sudoku** — 3 difficulty levels |
 | | **Memory Match**, **Hangman**, **Rock Paper Scissors** |
+| | **Math Sprint** — timed mental math (learn!) |
+| | **Memory Sequence** — watch & repeat (memory trainer) |
+| | **Slide Puzzle** — classic numbered tiles (logic) |
 
 > Every game is **100% original** — built from scratch, no copyrighted games
 > copied. It works great on phones, tablets, and laptops, perfect for a
