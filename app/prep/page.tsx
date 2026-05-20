@@ -55,7 +55,7 @@ const JOURNEY = [
     n: 4,
     emoji: "🧭",
     title: "Asked Dad for help",
-    body: "I showed it to my dad. He's my mentor — he guided me to take the project further with a more powerful tool.",
+    body: "I showed it to my dad and he referred me to my uncle. Both of them are my mentors. My uncle, my friends and I jumped on a Google Meet call together — he listened to our idea and guided us to take the project further with a more powerful tool (Claude). It's been a really good learning for me!",
     token: "sun",
   },
   {
