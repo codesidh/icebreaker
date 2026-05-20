@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Prep Sheet — Icebreaker",
   description:
-    "Mithun's prep sheet for presenting the Icebreaker project to friends and teachers.",
+    "Mithu's prep sheet for presenting the Icebreaker project to friends and teachers.",
   robots: { index: false, follow: false },
 };
 
@@ -125,7 +125,7 @@ export default function PrepPage() {
           <span aria-hidden>🧊</span> Icebreaker · Prep sheet
         </span>
         <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-muted ring-1 ring-white/10">
-          For Mithun · Not linked from the app
+          For Mithu · Not linked from the app
         </span>
       </div>
 
@@ -517,7 +517,7 @@ export default function PrepPage() {
       </section>
 
       <footer className="mt-10 border-t border-white/10 pt-6 pb-4 text-center text-xs font-semibold text-muted">
-        Icebreaker — a school project by Mithun. Built with ChatGPT, Lovable &
+        Icebreaker — a school project by Mithu. Built with ChatGPT, Lovable &
         Claude · Hosted on Microsoft Azure ☁️
       </footer>
     </div>
