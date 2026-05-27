@@ -5,18 +5,28 @@ import Shell from "@/components/Shell";
 import Confetti from "@/components/Confetti";
 import {
   TARGET,
+  friendlyMove,
   hintFor,
   optimalMove,
   randomMove,
 } from "@/lib/games/nim21";
 
 type Turn = "you" | "computer";
+type Mode = "friendly" | "chill" | "tricky";
+
+const MODES: { id: Mode; label: string }[] = [
+  { id: "friendly", label: "🤗 Friendly" },
+  { id: "chill", label: "😌 Chill" },
+  { id: "tricky", label: "😏 Tricky" },
+];
 
 export default function TwentyOnePage() {
   const [count, setCount] = useState(0);
-  const [turn, setTurn] = useState<Turn>("you");
-  const [first, setFirst] = useState<Turn>("you");
-  const [smart, setSmart] = useState(true); // true = Tricky, false = Chill
+  // Default the computer to go first — that puts the human in the
+  // *winning* position when they spot the math trick.
+  const [turn, setTurn] = useState<Turn>("computer");
+  const [first, setFirst] = useState<Turn>("computer");
+  const [mode, setMode] = useState<Mode>("friendly");
   const [showTrick, setShowTrick] = useState(false);
   const [loser, setLoser] = useState<Turn | null>(null);
   const [log, setLog] = useState<string[]>([]);
@@ -61,11 +71,19 @@ export default function TwentyOnePage() {
   useEffect(() => {
     if (turn !== "computer" || over) return;
     const t = setTimeout(() => {
-      const n = smart ? optimalMove(count) : randomMove(count);
+      let n: number;
+      if (mode === "tricky") {
+        // Even Tricky slips ~15% of the time — it's a kids' game.
+        n = Math.random() < 0.15 ? randomMove(count) : optimalMove(count);
+      } else if (mode === "chill") {
+        n = randomMove(count);
+      } else {
+        n = friendlyMove(count);
+      }
       applyMove("computer", Math.min(n, TARGET - count));
     }, 600);
     return () => clearTimeout(t);
-  }, [turn, over, count, smart, applyMove]);
+  }, [turn, over, count, mode, applyMove]);
 
   const yourTurn = turn === "you" && !over;
 
@@ -74,23 +92,29 @@ export default function TwentyOnePage() {
       emoji="✋"
       title="Count to 21"
       accent="bg-tangerine"
-      blurb="Take turns adding 1, 2, or 3. Whoever is forced to say 21 loses. There's a secret math trick to win every time…"
+      blurb="Take turns adding 1, 2, or 3. Whoever is forced to say 21 loses. There's a secret math trick — see if you can spot it!"
     >
       <Confetti seed={wins} />
       <div className="flex flex-col items-center gap-6">
         <div className="flex flex-wrap items-center justify-center gap-2">
-          <button
-            onClick={() => setSmart(false)}
-            className={`btn btn-sm ${!smart ? "bg-grape text-white" : "bg-white/8"}`}
-          >
-            😌 Chill computer
-          </button>
-          <button
-            onClick={() => setSmart(true)}
-            className={`btn btn-sm ${smart ? "bg-grape text-white" : "bg-white/8"}`}
-          >
-            😏 Tricky computer
-          </button>
+          {MODES.map((m) => (
+            <button
+              key={m.id}
+              onClick={() => setMode(m.id)}
+              className={`btn btn-sm ${
+                mode === m.id ? "bg-grape text-white" : "bg-white/8"
+              }`}
+              title={
+                m.id === "friendly"
+                  ? "Computer roots for you and usually slips up"
+                  : m.id === "chill"
+                    ? "Computer plays random moves"
+                    : "Computer mostly plays the perfect line"
+              }
+            >
+              {m.label}
+            </button>
+          ))}
         </div>
 
         <div className="pop flex flex-col items-center gap-1 bg-paper px-12 py-7">

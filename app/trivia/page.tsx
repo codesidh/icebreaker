@@ -1,13 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Shell from "@/components/Shell";
-import { TRIVIA } from "@/lib/data/trivia";
+import { TRIVIA, type Trivia } from "@/lib/data/trivia";
 
 // One game = 10 questions (or fewer if the bank is smaller).
 const ROUND = Math.min(10, TRIVIA.length);
 const HISTORY_KEY = "icebreaker.trivia.history";
 const MAX_HISTORY = 8;
+
+// Difficulty: 1 = easy, 5 = hard. We don't have hand-labeled
+// difficulties, so estimate from question length + average option
+// length. Longer wording is, on average, a tougher question.
+function estimateDifficulty(q: Trivia): number {
+  const qLen = q.question.length;
+  const avg = q.options.reduce((s, o) => s + o.length, 0) / q.options.length;
+  const score = qLen + avg * 1.4;
+  if (score < 50) return 1;
+  if (score < 70) return 2;
+  if (score < 95) return 3;
+  if (score < 125) return 4;
+  return 5;
+}
 
 type Attempt = { score: number; total: number; at: number };
 
@@ -18,15 +32,6 @@ type Tier = {
   quote: string;
   token: string; // a palette color token, e.g. "grape"
 };
-
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
 
 // Ocean-themed ladder. Score is out of ROUND (usually 10).
 function tierFor(score: number, total: number): Tier {
@@ -85,19 +90,48 @@ function tierFor(score: number, total: number): Tier {
 const LADDER = ["🐚", "🦀", "🐢", "🐠", "🐬", "🦈"];
 
 export default function TriviaPage() {
-  // Indices into TRIVIA for this round (length = ROUND, no repeats).
+  // Indices into TRIVIA for this round, built lazily — we pick the
+  // next question on demand so we can tune difficulty as we go.
   const [round, setRound] = useState<number[]>([]);
   const [pos, setPos] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
   const [score, setScore] = useState(0);
   const [phase, setPhase] = useState<"play" | "done">("play");
   const [history, setHistory] = useState<Attempt[]>([]);
+  // Target difficulty for the *next* question (1..5).
+  const [target, setTarget] = useState(2);
+
+  // Pre-compute difficulty for every question once.
+  const difficulties = useMemo(() => TRIVIA.map(estimateDifficulty), []);
+
+  function pickQuestion(used: Set<number>, want: number): number {
+    // Pick the unused question whose difficulty is closest to `want`,
+    // with a random tiebreak so the same round never feels identical.
+    let bestIdxs: number[] = [];
+    let bestDist = Infinity;
+    for (let i = 0; i < TRIVIA.length; i++) {
+      if (used.has(i)) continue;
+      const dist = Math.abs(difficulties[i] - want);
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestIdxs = [i];
+      } else if (dist === bestDist) {
+        bestIdxs.push(i);
+      }
+    }
+    if (bestIdxs.length === 0) return 0;
+    return bestIdxs[Math.floor(Math.random() * bestIdxs.length)];
+  }
 
   function startRound() {
-    setRound(shuffle(TRIVIA.map((_, i) => i)).slice(0, ROUND));
+    // First question is medium-easy. We grow it from there.
+    const startTarget = 2;
+    const first = pickQuestion(new Set(), startTarget);
+    setRound([first]);
     setPos(0);
     setPicked(null);
     setScore(0);
+    setTarget(startTarget);
     setPhase("play");
   }
 
@@ -119,7 +153,14 @@ export default function TriviaPage() {
   function choose(i: number) {
     if (picked !== null) return;
     setPicked(i);
-    if (i === q.answer) setScore((s) => s + 1);
+    const correct = i === q.answer;
+    if (correct) setScore((s) => s + 1);
+    // Adaptive difficulty: nudge up on correct, down on wrong.
+    // Clamped to [1, 5] so we don't run off the difficulty scale.
+    setTarget((t) => {
+      const next = correct ? t + 1 : t - 1;
+      return Math.max(1, Math.min(5, next));
+    });
   }
 
   function finish() {
@@ -139,6 +180,11 @@ export default function TriviaPage() {
       finish();
       return;
     }
+    // Lazily extend the round with a question matched to the current
+    // target difficulty (already updated by `choose`).
+    const used = new Set(round);
+    const nextIdx = pickQuestion(used, target);
+    setRound((r) => [...r, nextIdx]);
     setPicked(null);
     setPos((p) => p + 1);
   }

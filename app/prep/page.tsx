@@ -27,6 +27,7 @@ const GAMES_LIST = [
   "Math Sprint",
   "Memory Sequence",
   "Slide Puzzle",
+  "Maze",
 ];
 
 const JOURNEY = [
@@ -378,7 +379,7 @@ export default function PrepPage() {
             </div>
           </div>
           <p className="mb-4 text-base font-semibold text-muted sm:text-lg">
-            Once the ice is broken, there are <b>10 original games</b> to play
+            Once the ice is broken, there are <b>11 original games</b> to play
             together — or alone if you just want to have fun.
           </p>
           <div className="flex flex-wrap gap-2">

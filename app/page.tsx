@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Tile from "@/components/Tile";
 import StatStrip from "@/components/StatStrip";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const ICEBREAKERS = [
   {
@@ -104,6 +105,13 @@ const GAMES = [
     blurb: "Slide the numbers back into order.",
     color: "bg-sky",
   },
+  {
+    href: "/games/maze",
+    emoji: "🧭",
+    title: "Maze",
+    blurb: "Find your way from start to finish. Arrows, WASD, or swipe.",
+    color: "bg-grape",
+  },
 ];
 
 export default function HomePage() {
@@ -122,9 +130,12 @@ export default function HomePage() {
             🎉 Credits
           </Link>
         </div>
-        <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-muted ring-1 ring-white/10">
-          School project
-        </span>
+        <div className="flex items-center gap-3">
+          <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-muted ring-1 ring-white/10">
+            School project
+          </span>
+          <ThemeToggle />
+        </div>
       </nav>
 
       {/* ---- Hero ---- */}

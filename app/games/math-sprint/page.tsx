@@ -7,8 +7,13 @@ import { loadJSON, saveJSON } from "@/lib/storage";
 
 type Level = "easy" | "medium" | "hard";
 type Phase = "idle" | "play" | "over";
+type Duration = 30 | 60 | 90;
 
-const ROUND_SECONDS = 60;
+const DURATIONS: { value: Duration; label: string }[] = [
+  { value: 30, label: "⚡ 30s" },
+  { value: 60, label: "⏱️ 60s" },
+  { value: 90, label: "🏁 90s" },
+];
 
 const LEVELS: { id: Level; label: string; hint: string }[] = [
   { id: "easy", label: "🙂 Easy", hint: "Adding & subtracting" },
@@ -71,16 +76,19 @@ function makeProblem(level: Level): Problem {
 export default function MathSprintPage() {
   const [phase, setPhase] = useState<Phase>("idle");
   const [level, setLevel] = useState<Level>("easy");
+  const [duration, setDuration] = useState<Duration>(60);
   const [problem, setProblem] = useState<Problem | null>(null);
   const [score, setScore] = useState(0);
   const [asked, setAsked] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(ROUND_SECONDS);
+  const [timeLeft, setTimeLeft] = useState<number>(60);
   const [picked, setPicked] = useState<number | null>(null);
   const [best, setBest] = useState(0);
   const [newBest, setNewBest] = useState(false);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const bestKey = `icebreaker.mathsprint.best.${level}`;
+  // Best score is tracked per (level, duration) — a 30s and a 90s
+  // round on the same level aren't really comparable.
+  const bestKey = `icebreaker.mathsprint.best.${level}.${duration}`;
 
   useEffect(() => {
     setBest(loadJSON<number>(bestKey, 0));
@@ -110,7 +118,7 @@ export default function MathSprintPage() {
     setAsked(0);
     setPicked(null);
     setNewBest(false);
-    setTimeLeft(ROUND_SECONDS);
+    setTimeLeft(duration);
     setProblem(makeProblem(level));
     setPhase("play");
     stop();
@@ -123,7 +131,7 @@ export default function MathSprintPage() {
         return t - 1;
       });
     }, 1000);
-  }, [level, finish, stop]);
+  }, [level, duration, finish, stop]);
 
   useEffect(() => () => stop(), [stop]);
 
@@ -145,7 +153,7 @@ export default function MathSprintPage() {
       emoji="⚡"
       title="Math Sprint"
       accent="bg-mint"
-      blurb="How many can you solve in 60 seconds? Great mental-math practice — pick a level and go!"
+      blurb="How many can you solve before time runs out? Pick a level, pick a duration, and go!"
     >
       <Confetti seed={newBest ? 1 : 0} />
       <div className="flex flex-col items-center gap-6">
@@ -165,6 +173,24 @@ export default function MathSprintPage() {
           ))}
         </div>
 
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <span className="text-xs font-extrabold uppercase tracking-widest opacity-70">
+            Round length
+          </span>
+          {DURATIONS.map((d) => (
+            <button
+              key={d.value}
+              onClick={() => setDuration(d.value)}
+              disabled={phase === "play"}
+              className={`btn btn-sm ${
+                duration === d.value ? "bg-mint text-white" : "bg-white/8"
+              } disabled:opacity-40`}
+            >
+              {d.label}
+            </button>
+          ))}
+        </div>
+
         {phase === "idle" ? (
           <div className="pop flex max-w-md flex-col items-center gap-4 p-8 text-center">
             <div className="text-5xl">⚡</div>
@@ -172,10 +198,11 @@ export default function MathSprintPage() {
               Solve as many as you can before the timer runs out.
             </p>
             <p className="text-sm font-semibold text-muted">
-              {LEVELS.find((l) => l.id === level)!.hint} · Best: {best}
+              {LEVELS.find((l) => l.id === level)!.hint} · {duration}s · Best:{" "}
+              {best}
             </p>
             <button className="btn bg-mint text-lg" onClick={start}>
-              Start sprint ⏱️
+              Start {duration}s sprint ⏱️
             </button>
           </div>
         ) : null}
@@ -190,7 +217,7 @@ export default function MathSprintPage() {
               <div className="h-3 w-full overflow-hidden rounded-full border border-white/15 bg-white/5">
                 <div
                   className="h-full rounded-full bg-mint transition-[width] duration-1000 ease-linear"
-                  style={{ width: `${(timeLeft / ROUND_SECONDS) * 100}%` }}
+                  style={{ width: `${(timeLeft / duration) * 100}%` }}
                 />
               </div>
             </div>
@@ -237,7 +264,7 @@ export default function MathSprintPage() {
               {score} correct!
             </p>
             <p className="text-sm font-semibold text-muted">
-              Accuracy {accuracy}% · Best {best}
+              Accuracy {accuracy}% · {duration}s · Best {best}
               {newBest ? " · New record! 🎉" : ""}
             </p>
             <div className="mt-2 flex gap-2">
@@ -248,7 +275,7 @@ export default function MathSprintPage() {
                 className="btn bg-white/8"
                 onClick={() => setPhase("idle")}
               >
-                Change level
+                Change settings
               </button>
             </div>
           </div>

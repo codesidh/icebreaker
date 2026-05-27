@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const COLORS = [
   "var(--color-sun)",
@@ -14,7 +14,8 @@ const COLORS = [
 
 /**
  * A burst of falling confetti. Bump `seed` (e.g. a win counter) to re-fire.
- * Renders nothing when seed is 0 so it stays quiet until something is won.
+ * Pieces fade out as they reach the bottom of the viewport, and are then
+ * unmounted entirely — so no rogue squares ever sit at the page edge.
  */
 export default function Confetti({ seed }: { seed: number }) {
   const pieces = useMemo(() => {
@@ -30,7 +31,25 @@ export default function Confetti({ seed }: { seed: number }) {
     }));
   }, [seed]);
 
-  if (pieces.length === 0) return null;
+  // Track which burst is currently on-screen. After the longest piece
+  // finishes falling we wipe everything from the DOM.
+  const [activeSeed, setActiveSeed] = useState(seed);
+
+  useEffect(() => {
+    if (seed <= 0) {
+      setActiveSeed(seed);
+      return;
+    }
+    setActiveSeed(seed);
+    // Longest piece = max(delay) + max(duration) → 0.6 + 3.8 = 4.4s.
+    // Add a small buffer so the fade-out has time to finish.
+    const t = setTimeout(() => setActiveSeed(0), 5000);
+    return () => clearTimeout(t);
+  }, [seed]);
+
+  if (activeSeed <= 0 || pieces.length === 0 || activeSeed !== seed) {
+    return null;
+  }
 
   return (
     <div

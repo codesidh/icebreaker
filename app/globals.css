@@ -37,6 +37,17 @@
     color-scheme: dark;
   }
 
+  /* Light mode — keeps accent palette identical; only the surfaces,
+     ink, and ambient glows change. Applied by an inline script in
+     layout.tsx before first paint to avoid flashing. */
+  html[data-theme="light"] {
+    --color-cream: #f7f5ff;
+    --color-paper: rgba(20, 15, 45, 0.05);
+    --color-ink: #1a1730;
+    --color-muted: #5d588a;
+    color-scheme: light;
+  }
+
   * {
     min-width: 0;
   }
@@ -75,6 +86,27 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
+  }
+
+  /* Lighter, softer glow pools in light mode so the canvas stays
+     bright and the surfaces sit on a clean off-white field. */
+  html[data-theme="light"] body {
+    background-image:
+      radial-gradient(
+        780px 520px at 50% -180px,
+        rgba(124, 92, 255, 0.18),
+        transparent 70%
+      ),
+      radial-gradient(
+        620px 480px at 100% 4%,
+        rgba(47, 143, 224, 0.13),
+        transparent 62%
+      ),
+      radial-gradient(
+        680px 520px at 0% 90%,
+        rgba(224, 85, 155, 0.13),
+        transparent 64%
+      );
   }
 
   h1,
@@ -302,6 +334,42 @@
     border-color: color-mix(in srgb, var(--color-mint) 78%, transparent);
     box-shadow: 0 12px 30px -14px var(--color-mint);
   }
+
+  /* ---------------------------------------------------------
+     Light-mode surface overrides. The dark theme uses faint
+     white veneers over an indigo canvas; in light mode we
+     swap to faint ink veneers over a warm off-white canvas
+     so the same components stay legible.
+     --------------------------------------------------------- */
+  html[data-theme="light"] .pop {
+    background: rgba(255, 255, 255, 0.62);
+    border-color: rgba(20, 15, 45, 0.1);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.7),
+      0 22px 48px -24px rgba(20, 15, 45, 0.25);
+  }
+
+  html[data-theme="light"] .btn {
+    border-color: rgba(20, 15, 45, 0.12);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.55),
+      0 10px 24px -14px rgba(20, 15, 45, 0.3);
+  }
+  html[data-theme="light"] .btn:hover {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.65),
+      0 16px 30px -14px rgba(20, 15, 45, 0.35);
+  }
+
+  html[data-theme="light"] .chip {
+    background: rgba(20, 15, 45, 0.04);
+    border-color: rgba(20, 15, 45, 0.12);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  }
+  html[data-theme="light"] .chip:hover:not(:disabled) {
+    border-color: rgba(20, 15, 45, 0.28);
+    box-shadow: 0 8px 18px -8px rgba(20, 15, 45, 0.25);
+  }
 }
 
 @layer utilities {
@@ -388,13 +456,19 @@
     animation: confetti-fall linear forwards;
   }
   @keyframes confetti-fall {
-    from {
+    0% {
       transform: translateY(-12vh) rotate(0deg);
       opacity: 1;
     }
-    to {
+    /* Once a piece reaches the bottom of the viewport, fade it out
+       quickly so nothing piles up at the edge or lingers on screen. */
+    85% {
+      transform: translateY(96vh) rotate(450deg);
+      opacity: 1;
+    }
+    100% {
       transform: translateY(108vh) rotate(540deg);
-      opacity: 0.85;
+      opacity: 0;
     }
   }
 
@@ -407,5 +481,66 @@
       animation: none;
       opacity: 1;
     }
+  }
+
+  /* ---------------------------------------------------------
+     Light-mode re-tint for hard-coded white overlays. These
+     classes (bg-white/N, border-white/N, ring-white/N) appear
+     throughout the components for soft frosted surfaces;
+     replacing white with translucent ink keeps them visible
+     when the canvas is bright.
+     --------------------------------------------------------- */
+  html[data-theme="light"] .bg-white\/5 {
+    background-color: rgba(20, 15, 45, 0.04);
+  }
+  html[data-theme="light"] .bg-white\/6 {
+    background-color: rgba(20, 15, 45, 0.05);
+  }
+  html[data-theme="light"] .bg-white\/8 {
+    background-color: rgba(20, 15, 45, 0.06);
+  }
+  html[data-theme="light"] .bg-white\/10 {
+    background-color: rgba(20, 15, 45, 0.07);
+  }
+  html[data-theme="light"] .bg-white\/12 {
+    background-color: rgba(20, 15, 45, 0.08);
+  }
+
+  html[data-theme="light"] .border-white\/10 {
+    border-color: rgba(20, 15, 45, 0.12);
+  }
+  html[data-theme="light"] .border-white\/12 {
+    border-color: rgba(20, 15, 45, 0.14);
+  }
+  html[data-theme="light"] .border-white\/15 {
+    border-color: rgba(20, 15, 45, 0.16);
+  }
+  html[data-theme="light"] .border-white\/20 {
+    border-color: rgba(20, 15, 45, 0.2);
+  }
+  html[data-theme="light"] .border-white\/28 {
+    border-color: rgba(20, 15, 45, 0.28);
+  }
+
+  html[data-theme="light"] .ring-white\/10 {
+    --tw-ring-color: rgba(20, 15, 45, 0.12);
+  }
+  html[data-theme="light"] .ring-white\/12 {
+    --tw-ring-color: rgba(20, 15, 45, 0.14);
+  }
+  html[data-theme="light"] .ring-white\/15 {
+    --tw-ring-color: rgba(20, 15, 45, 0.18);
+  }
+
+  /* The text-ink/80 utility is the most-used "almost ink" text color.
+     In dark mode it's near-white; in light mode it should be near-ink. */
+  html[data-theme="light"] .text-ink\/80 {
+    color: rgba(26, 23, 48, 0.82);
+  }
+
+  /* Glass nav surfaces feel too "wet" on white; soften the fill. */
+  html[data-theme="light"] .glass {
+    background: rgba(255, 255, 255, 0.62);
+    border-color: rgba(20, 15, 45, 0.1);
   }
 }

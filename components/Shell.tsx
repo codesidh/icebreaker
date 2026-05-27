@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Shell({
   emoji,
@@ -30,12 +31,15 @@ export default function Shell({
         >
           ← Back
         </Link>
-        <Link
-          href="/"
-          className="flex items-center gap-2 pr-1 font-display text-lg font-bold tracking-tight"
-        >
-          <span aria-hidden>🧊</span> Icebreaker
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            href="/"
+            className="flex items-center gap-2 pr-1 font-display text-lg font-bold tracking-tight"
+          >
+            <span aria-hidden>🧊</span> Icebreaker
+          </Link>
+          <ThemeToggle />
+        </div>
       </nav>
 
       <header

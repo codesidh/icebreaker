@@ -27,10 +27,17 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffd23f",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f7f5ff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b0918" },
+  ],
   width: "device-width",
   initialScale: 1,
 };
+
+// Runs BEFORE React hydrates so the saved theme is on <html> before
+// the first paint — no flash of the wrong theme.
+const THEME_INIT = `(function(){try{var t=localStorage.getItem('icebreaker.theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();`;
 
 export default function RootLayout({
   children,
@@ -39,6 +46,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${fredoka.variable} ${nunito.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
+      </head>
       <body className="min-h-screen">{children}</body>
     </html>
   );

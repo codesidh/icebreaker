@@ -20,6 +20,29 @@ export function randomMove(count: number): number {
   return 1 + Math.floor(Math.random() * Math.max(1, max));
 }
 
+/**
+ * "Friendly" computer: usually picks a move that hands the win to the
+ * player. It still plays — it's just rooting for the kid. Falls back to
+ * a random move sometimes so it isn't *too* obvious.
+ */
+export function friendlyMove(count: number): number {
+  const max = Math.min(3, TARGET - count);
+  // 80% of the time, look for a move that leaves the player on a
+  // winning (non-multiple-of-4) total.
+  if (Math.random() < 0.8) {
+    const wins: number[] = [];
+    for (let n = 1; n <= max; n++) {
+      const next = count + n;
+      if (next >= TARGET) continue; // don't lose on purpose by saying 21
+      if (next % 4 !== 0) wins.push(n);
+    }
+    if (wins.length > 0) {
+      return wins[Math.floor(Math.random() * wins.length)];
+    }
+  }
+  return randomMove(count);
+}
+
 /** True when the player about to move is in a losing position. */
 export function isLosing(count: number): boolean {
   return count % 4 === 0;
